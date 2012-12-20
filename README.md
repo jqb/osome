@@ -17,45 +17,78 @@ In Development
 
 path
 ----
+	
+   ```bash
+   $ ls -la 
+   total 20
+   drwxrwxr-x 3 seba seba 4096 Dec 20 22:37 .
+   drwxrwxr-x 5 seba seba 4096 Dec 20 22:38 ..
+   drwxrwxr-x 2 seba seba 4096 Dec 20 22:37 dir
+   -rw-rw-r-- 1 seba seba    0 Dec 20 22:37 file
+   ```
+   
+   ```python
+   >>> path(".")
+   .
+   
+   >>> path('.').is_dir()
+   True
+   
+   >>> path(".").is_file()
+   False
+   
+   >>> path('.').exists()
+   True
+   
+   >>> path('.').ls()
+   [u'dir', u'file']
+   
+   >>> path('.').ls_files()
+   [u'file']
 
-  * path(".")
+   >>> path('.').ls_dirs()
+   [u'dir']
+   
+   >>> path('.') / path('file')
+   u'./file'
 
-  * path(".").is_dir() -> bool
-  * path(".").is_file() -> bool
-  * path(".").exists() -> bool
-
-  * path(".").files() -> list
-  * path(".").files_iter() -> generator
-
-  * path(".").files("*.py") -> list
-  * path(".").files_iter("*.py") -> generator
-
-  * path(".").dirs() -> list
-  * path(".").dirs_iter() -> generator
-
-  * path(".").dirs("test*") -> list
-  * path(".").dirs_iter("test*") -> generator
-
-  * path(".").list("*.py", recursive=True)
-  * path(".").list_iter("*.py", recursive=True)
-
-  * path("/home") / path("seba") / path("test") -> path
-  * path("/home") + path("seba") + path("test") -> path
-  * path.join(['home','seba']) -> path
-
-  * path("/home").append("test") -> path
-  * path("/home").append(path('test')) -> path
-  * path("/home/seba/test").split() -> list ? path?
-
-  * path("/home/seba").open("w") -> file
-  * path("/home/seba").touch() -> path
-  * path("/home/seba").mkdir(p=False) -> path
-  * path("/home/seba").rm(f=False, r=False) -> path | list?
-  * path("/home/seba").ln(s=True, target=path|string) -> path | list?
-  * path("/home/seba").cp(r=False, target=path|string) -> path | list?
-
-  * for element in path(".")
-
+   >>> (path('.') / path('file')).exists()
+   True
+   
+   >>> path.join('.','file')
+   u'./file'
+   
+   >>> path.join('.','file').exists()
+   True
+   
+   >>> path.join('.','file').open("w")
+   <open file u'./file', mode 'w' at 0x1b23660>
+   
+   >>> path("file2").touch().exists()
+   True
+   
+   >>> path("dir2").mkdir().exists()
+   True
+   
+   >>> path("file2").rm().exists()
+   False
+   
+   >>> path("dir2").rm().exists()
+   False 
+   ```
+   
+   Not implemented
+   
+   * path(".").ls_iter("*.py")
+   * path(".").ls_files_iter("*.py") -> generator
+   * path(".").ls_dirs_iter() -> generator
+   * path("/home") + path("seba") + path("test") -> path
+   * path("/home").append("test") -> path
+   * path("/home").append(path('test')) -> path
+   * path("/home/seba/test").split() -> list ? path?
+   * for element in path(".")
+   * path("/home/seba").cp(r=False, target=path|string) -> path | list?
+   * path("/home/seba").ln(s=True, target=path|string) -> path | list?
 
 run
 ---
