@@ -113,6 +113,13 @@ run
 
   >>> run('ls -la').run('wc -l').run('wc -c')
   ls -la | wc -l | wc -c
+  
+  >>> print run.run('ls -la').stdout.lines
+  [u'total 20',
+   u'drwxrwxr-x 3 seba seba 4096 Dec 20 22:55 .',
+   u'drwxrwxr-x 5 seba seba 4096 Dec 20 22:57 ..',
+   u'drwxrwxr-x 2 seba seba 4096 Dec 20 22:37 dir',
+   u'-rw-rw-r-- 1 seba seba    0 Dec 20 22:52 file']
   ```
 
 
