@@ -56,7 +56,7 @@ class path(unicode):
         return self
 
     def open(self, *args, **kwargs):
-        return open(*args, **kwargs)
+        return open(self, *args, **kwargs)
 
     def __div__(self, other):
         return path(os.path.join(self, other))
