@@ -1,8 +1,9 @@
-from path import path, path_list
 import os
 import shutil
 
 import pytest
+
+from path import path
 
 
 root = 'xxx'
@@ -150,6 +151,3 @@ def test_join():
     assert path.join(root, file_1).exists()
     assert not path.join(root, file_1, 'xxx').exists()
 
-
-def test_path_list():
-    assert path_list == path(root).ls().__class__
