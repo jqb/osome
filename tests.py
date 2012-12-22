@@ -35,6 +35,11 @@ def teardown_function(function):
     shutil.rmtree(root)
 
 
+
+def test_path():
+    assert path(root, file_1).exists()
+    assert not path(root, file_1, 'xxx').exists()
+
 def test_exists():
     assert path(dir_1_path).exists()
     assert path(file_1_path).exists()

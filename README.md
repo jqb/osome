@@ -25,11 +25,14 @@ path
    drwxrwxr-x 5 seba seba 4096 Dec 20 22:38 ..
    drwxrwxr-x 2 seba seba 4096 Dec 20 22:37 dir
    -rw-rw-r-- 1 seba seba    0 Dec 20 22:37 file
-   ```
+   ```,
    
    ```python
    >>> path(".")
    .
+   
+   >>> path(".", "dir", 'file')
+   u'./dir/file'
    
    >>> path('.').is_dir()
    True
@@ -55,13 +58,13 @@ path
    >>> (path('.') / path('file')).exists()
    True
    
-   >>> path.join('.','file')
+   >>> path.join('.', 'file')
    u'./file'
    
-   >>> path.join('.','file').exists()
+   >>> path.join('.', 'file').exists()
    True
    
-   >>> path.join('.','file').open("w")
+   >>> path.join('.', 'file').open("w")
    <open file u'./file', mode 'w' at 0x1b23660>
    
    >>> path("file2").touch().exists()

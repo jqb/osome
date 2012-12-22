@@ -5,6 +5,11 @@ import fnmatch
 
 class path(unicode):
 
+    def __new__(cls, *args):
+        if len(args) > 1:
+            return unicode.__new__(path, cls.join(*args))
+        return unicode.__new__(path, *args)
+
     def exists(self):
         return os.path.exists(self)
 
