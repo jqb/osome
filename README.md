@@ -1,7 +1,8 @@
-In Development
-==============
+python-shelltools (in development)
+==================================
 
-  Nothing interesting here.
+  The bucket of python shell helpers, no dependencies, simple API. 
+  This lib is development, nothing interesting here yet. 
 
   * shelltools: (shell)
 	* path - path wraper around all methods related to path manipulation
@@ -13,7 +14,6 @@ In Development
 	* text: - helper function to manipulate
 	  * text_list
 	  * wrap
-
 
 path
 ----
@@ -127,3 +127,5 @@ links
 -----
 
   * http://www.ruby-doc.org/stdlib-1.9.3/libdoc/fileutils/rdoc/index.html
+  * https://github.com/kennethreitz/clint
+  * https://github.com/jaraco/path.py
