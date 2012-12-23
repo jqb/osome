@@ -91,9 +91,6 @@ path
    
    Not implemented
    
-   * path('/home') + path('seba') + path('test') -> path
-   * path('/home').append('test') -> path
-   * path('/home').append(path('test')) -> path
    * path('/home/seba/test').split() -> list ? path?
    * path('/home/seba').cp(r=False, target=path|string) -> path | list?
    * path('/home/seba').ln(s=True, target=path|string) -> path | list?
