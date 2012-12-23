@@ -3,6 +3,8 @@ python-shelltools (in development)
 
   The bucket of python shell helpers, no dependencies, simple API. 
   This lib is development, nothing interesting here yet. 
+  
+  Python2.7 only (for now).
 
   * shelltools: (shell)
 	* path - path wraper around all methods related to path manipulation
