@@ -25,19 +25,20 @@ path
    drwxrwxr-x 5 seba seba 4096 Dec 20 22:38 ..
    drwxrwxr-x 2 seba seba 4096 Dec 20 22:37 dir
    -rw-rw-r-- 1 seba seba    0 Dec 20 22:37 file
-   ```,
+   ```
+
    
    ```python
-   >>> path(".")
+   >>> path('.')
    .
    
-   >>> path(".", "dir", 'file')
+   >>> path('.', 'dir', 'file')
    u'./dir/file'
    
    >>> path('.').is_dir()
    True
    
-   >>> path(".").is_file()
+   >>> path('.').is_file()
    False
    
    >>> path('.').exists()
@@ -64,34 +65,34 @@ path
    >>> path.join('.', 'file').exists()
    True
    
-   >>> path.join('.', 'file').open("w")
+   >>> path.join('.', 'file').open('w')
    <open file u'./file', mode 'w' at 0x1b23660>
    
-   >>> path("file2").touch().exists()
+   >>> path('file2').touch().exists()
    True
    
-   >>> path("dir2").mkdir().exists()
+   >>> path('dir2').mkdir().exists()
    True
    
-   >>> path("file2").rm().exists()
+   >>> path('file2').rm().exists()
    False
    
-   >>> path("dir2").rm().exists()
+   >>> path('dir2').rm().exists()
    False 
    ```
    
    Not implemented
    
-   * path(".").ls_iter("*.py")
-   * path(".").ls_files_iter("*.py") -> generator
-   * path(".").ls_dirs_iter() -> generator
-   * path("/home") + path("seba") + path("test") -> path
-   * path("/home").append("test") -> path
-   * path("/home").append(path('test')) -> path
-   * path("/home/seba/test").split() -> list ? path?
-   * for element in path(".")
-   * path("/home/seba").cp(r=False, target=path|string) -> path | list?
-   * path("/home/seba").ln(s=True, target=path|string) -> path | list?
+   * path('.').ls_iter('*.py')
+   * path('.').ls_files_iter('*.py') -> generator
+   * path('.').ls_dirs_iter() -> generator
+   * path('/home') + path('seba') + path('test') -> path
+   * path('/home').append('test') -> path
+   * path('/home').append(path('test')) -> path
+   * path('/home/seba/test').split() -> list ? path?
+   * for element in path('.')
+   * path('/home/seba').cp(r=False, target=path|string) -> path | list?
+   * path('/home/seba').ln(s=True, target=path|string) -> path | list?
 
 run
 ---
