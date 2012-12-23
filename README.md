@@ -44,6 +44,11 @@ path
    >>> path('.').exists()
    True
    
+   >>> for e in path('.'):
+   ...     print e
+   'dir' 
+   'file'
+   
    >>> path('.').ls()
    [u'dir', u'file']
    
@@ -90,7 +95,6 @@ path
    * path('/home').append('test') -> path
    * path('/home').append(path('test')) -> path
    * path('/home/seba/test').split() -> list ? path?
-   * for element in path('.')
    * path('/home/seba').cp(r=False, target=path|string) -> path | list?
    * path('/home/seba').ln(s=True, target=path|string) -> path | list?
 

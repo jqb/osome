@@ -74,6 +74,9 @@ class path(unicode):
     def open(self, *args, **kwargs):
         return open(self, *args, **kwargs)
 
+    def __iter__(self):
+        return self.walk()
+
     def __div__(self, other):
         return path(os.path.join(self, other))
 

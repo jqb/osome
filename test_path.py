@@ -141,6 +141,10 @@ def test_walk():
     dir_content = path(root).walk()
     assert len([e for e in dir_content]) == len(dir_list + file_list)
 
+def test_iter():
+    dir_content = path(root)
+    assert len([e for e in dir_content]) == len(dir_list + file_list)
+
 def test__div__():
     joined_path = path(root) / path(file_1)
     assert joined_path.exists()
