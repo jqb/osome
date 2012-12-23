@@ -11,6 +11,9 @@ def test_run():
     assert isinstance(output, unicode)
     assert isinstance(output.lines, list)
 
+    assert isinstance(output.q_lines, list)
+    assert isinstance(output.q_lines[0], list)
+
 
 def test_stdout():
     assert run('ls -la').stdout.lines

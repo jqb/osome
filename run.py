@@ -9,6 +9,10 @@ class std_output(unicode):
     def lines(self):
         return self.split("\n")
 
+    @property
+    def q_lines(self):
+        return [line.split() for line in self.split("\n")]
+
 
 class run(std_output):
 
@@ -34,7 +38,7 @@ class run(std_output):
         stdout = stdout.rstrip("\n")
         stderr = stderr.rstrip("\n")
 
-        obj = unicode.__new__(run, stdout)
+        obj = std_output.__new__(run, stdout)
 
         obj.stdout = std_output(stdout)
         obj.stderr = std_output(stderr)
