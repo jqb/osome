@@ -53,6 +53,9 @@ path
    >>> path('.').ls_dirs()
    [u'dir']
    
+   >>> path('.').walk()
+   <generator object walk at 0x7f7ff6f3c960>
+   
    >>> path('.') / path('file')
    u'./file'
 
@@ -83,9 +86,6 @@ path
    
    Not implemented
    
-   * path('.').ls_iter('*.py')
-   * path('.').ls_files_iter('*.py') -> generator
-   * path('.').ls_dirs_iter() -> generator
    * path('/home') + path('seba') + path('test') -> path
    * path('/home').append('test') -> path
    * path('/home').append(path('test')) -> path

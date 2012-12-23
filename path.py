@@ -48,14 +48,25 @@ class path(unicode):
         open(self, "a")
         return self
 
-    def ls(self, patern="*"):
-        return path_list([path(e) for e in os.listdir(self) if fnmatch.fnmatch(e, patern)])
+    def ls(self, pattern="*", sort=lambda e: (not e.is_dir(), e)):
+        content = [path(e) for e in os.listdir(self) if fnmatch.fnmatch(e, pattern)]
+        return sorted(content, key=sort)
 
     def ls_files(self, patern="*"):
         return [e for e in self.ls(patern) if (self / e).is_file()]
 
     def ls_dirs(self, patern="*"):
         return [e for e in self.ls(patern) if (self / e).is_dir()]
+
+    def walk(self, pattern="*", sort=lambda e: (e.is_dir(), e), r=False):
+        content = self.ls(pattern=pattern, sort=sort)
+        for element in content:
+
+            if fnmatch.fnmatch(element, pattern):
+                yield self / element
+            if element.is_dir() and r:
+                for item in element.walk(pattern="*", sort=sort):
+                    yield item
 
     def chmod(self, mod):
         return self

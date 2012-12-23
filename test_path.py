@@ -137,6 +137,9 @@ def test_ls_dirs():
     assert set(dir_list).issubset(dir_content)
     assert not set(file_list).issubset(dir_content)
 
+def test_walk():
+    dir_content = path(root).walk()
+    assert len([e for e in dir_content]) == len(dir_list + file_list)
 
 def test__div__():
     joined_path = path(root) / path(file_1)
