@@ -1,3 +1,5 @@
+.virtualenv
+
 # https://raw.github.com/github/gitignore/master/Python.gitignore
 
 *.py[cod]
