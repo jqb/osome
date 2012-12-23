@@ -50,3 +50,6 @@ class run(std_output):
     def run(self, command):
         return run(command, data=self)
 
+
+if __name__ == "__main__":
+    pass
