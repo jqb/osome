@@ -5,39 +5,14 @@ import subprocess
 
 class std_output(unicode):
 
-    def __new__(cls, content):
-        obj = unicode.__new__(std_output, content.rstrip("\n"))
-        obj.raw = content
-        return obj
-
     @property
     def lines(self):
         return self.split("\n")
 
 
-class run(object):
+class run(std_output):
 
-    def _parse_args(self,command):
-        splitter = shlex.shlex(command)
-        splitter.whitespace = '|'
-        splitter.whitespace_split = True
-        command = []
-
-        while True:
-            token = splitter.get_token()
-            if token:
-                command.append(token)
-            else:
-                break
-
-        command = list(map(shlex.split, command))
-        return command
-
-
-    def __init__(self, command, environment_variables=None, cwd=None, data=None, chain=None):
-        self.command = command
-        self.chain = chain or []
-        self.chain.append(command)
+    def __new__(cls, command, environment_variables=None, cwd=None, data=None):
 
         env = dict(os.environ)
         env.update(env or {})
@@ -56,25 +31,18 @@ class run(object):
 
         stdout, stderr = process.communicate(data)
 
-        self.stdout = std_output(stdout)
-        self.stderr = std_output(stderr)
+        stdout = stdout.rstrip("\n")
+        stderr = stderr.rstrip("\n")
 
-        self.status = process.returncode
+        obj = unicode.__new__(run, stdout)
+
+        obj.stdout = std_output(stdout)
+        obj.stderr = std_output(stderr)
+        obj.status = process.returncode
+        obj.command = command
+
+        return obj
 
     def run(self, command):
-        return run(command, data=self.stdout.raw, chain=self.chain)
+        return run(command, data=self)
 
-    def __repr__(self):
-        return " | ".join(self.chain)
-
-    def __str__(self):
-        return "%s" % self.stdout.rstrip("\n")
-
-
-if __name__ == "__main__":
-    import pprint
-    print run('ls -la').stdout
-    print run('ls -la').status
-    pprint.pprint(run('ls -la').stdout.lines)
-    print run('find .').run('xargs grep test')
-    print run('rm not_existing_directory').stderr
