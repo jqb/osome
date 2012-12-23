@@ -126,6 +126,22 @@ run
    u'-rw-rw-r-- 1 seba seba    0 Dec 20 22:52 file']
   ```
 
+text
+----
+   
+   ```python
+   >>> print wrap("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin lacinia risus", 30)
+   Lorem ipsum dolor sit amet,
+   consectetur adipiscing elit.
+   Duis sollicitudin lacinia
+   risus
+
+   >>> print text_list(["black", "red", "blue", "green"])
+   black, red, blue or green
+   
+   >>> print text_list(["black", "red", "blue", "green"], "and")
+   black, red, blue and green
+   ```
 
 links
 -----
