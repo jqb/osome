@@ -133,11 +133,10 @@ text
 ----
    
    ```python
-   >>> print wrap("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin lacinia risus", 30)
+   >>> print wrap("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin ", 30)
    Lorem ipsum dolor sit amet,
    consectetur adipiscing elit.
-   Duis sollicitudin lacinia
-   risus
+   Duis sollicitudin 
 
    >>> print text_list(["black", "red", "blue", "green"])
    black, red, blue or green
