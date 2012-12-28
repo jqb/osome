@@ -139,7 +139,7 @@ context
 	  
 	  (p / path('new_directory')).mkdir()
 	  
-	  (p / path('new_directory')).mkdir()
+	  (p / 'empty_file').touch()
   ```
 
 text
