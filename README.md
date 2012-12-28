@@ -134,17 +134,17 @@ context (not implemented)
 -------------------------
 
   ```python
-  with context('cd /tmp'):
+  with run('cd /tmp'):
       run('ls -la')
 
-  # or 
+  # or
 
   with path('/tmp'):
       run('ls -la')
   ```
 	  
   ```python
-  with context('workon tools'):
+  with run('workon tools'):
       run('pip install requests')
   ```
 
