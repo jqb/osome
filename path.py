@@ -85,10 +85,5 @@ class path(unicode):
         return path(os.path.join(*path_list))
 
 
-class path_list(list):
-    pass
-
-
-
 if __name__ == "__main__":
     pass
