@@ -3,8 +3,7 @@ import shutil
 
 import pytest
 
-from path import path
-
+from shelltools import path
 
 root = 'xxx'
 
