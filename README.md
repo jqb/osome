@@ -136,9 +136,8 @@ context (not implemented)
   ```python
   with context('cd ~'):
       run('ls -la')
-  ```
+	  
   
-  ```python
   with context('workon tools'):
       run('pip install requests')
   ```
