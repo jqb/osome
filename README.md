@@ -129,6 +129,20 @@ run
    u'-rw-rw-r-- 1 seba seba    0 Dec 20 22:52 file']
   ```
 
+
+context (not implemented)
+-------------------------
+
+  ```python
+  with context('cd ~'):
+      run('ls -la')
+  ```
+  
+  ```python
+  with context('workon tools'):
+      run('pip install requests')
+  ```
+
 text
 ----
    
