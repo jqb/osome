@@ -130,12 +130,16 @@ run
   ```
 
 
-run with context
-----------------
+context
+-------
 
   ```python
   with path('/tmp') as p:
-      p.run('ls -la')
+      print p.run('ls -la')
+	  
+	  (p / path('new_directory')).mkdir()
+	  
+	  (p / path('new_directory')).mkdir()
   ```
 
 text
