@@ -16,39 +16,43 @@ class std_output(unicode):
 
 class run(std_output):
 
-    def __new__(cls, command, environment_variables=None, cwd=None, data=None):
+    def __new__(cls, *args, **kwargs):
 
         env = dict(os.environ)
-        env.update(env or {})
+        env.update(kwargs.get('env', {}))
 
-        process = subprocess.Popen(
-            shlex.split(command),
-            universal_newlines=True,
-            shell=False,
-            cwd=cwd,
-            env=env,
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            bufsize=0,
-        )
+        cwd = kwargs.get('cwd')
+        data = kwargs.get('data')
 
-        stdout, stderr = process.communicate(data)
+        for command in args:
 
-        stdout = stdout.rstrip("\n")
-        stderr = stderr.rstrip("\n")
+            process = subprocess.Popen(
+                shlex.split(command),
+                universal_newlines=True,
+                shell=False,
+                cwd=cwd,
+                env=env,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                bufsize=0,
+            )
 
-        obj = std_output.__new__(run, stdout)
+            stdout, stderr = process.communicate(data)
 
-        obj.stdout = std_output(stdout)
-        obj.stderr = std_output(stderr)
-        obj.status = process.returncode
-        obj.command = command
+            stdout = stdout.rstrip("\n")
+            stderr = stderr.rstrip("\n")
+
+            obj = std_output.__new__(run, stdout)
+
+            obj.stdout = std_output(stdout)
+            obj.stderr = std_output(stderr)
+            obj.status = process.returncode
+            obj.command = command
+
+            data = obj.stdout
 
         return obj
-
-    def run(self, command):
-        return run(command, data=self)
 
 
 if __name__ == "__main__":

@@ -31,4 +31,4 @@ def test_status():
 
 
 def test_pipe():
-    assert run('ls -la').run('wc -l').status == 0
+    assert run('ls -la', 'wc -l').status == 0

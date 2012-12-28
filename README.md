@@ -112,16 +112,16 @@ run
   >>> print run('rm not_existing_directory').stdout
   rm: cannot remove `not_existing_directory': No such file or directory
 
-  >>> print run('ls -la').run('wc -l')
+  >>> print run('ls -la', 'wc -l')
   14
 
-  >>> print run('ls -la').run('wc -l').run('wc -c')
+  >>> print run('ls -la', 'wc -l', 'wc -c')
   3
 
-  >>> run('ls -la').run('wc -l').run('wc -c')
+  >>> run('ls -la', 'wc -l', 'wc -c')
   ls -la | wc -l | wc -c
   
-  >>> print run.run('ls -la').stdout.lines
+  >>> print run('ls -la').stdout.lines
   [u'total 20',
    u'drwxrwxr-x 3 seba seba 4096 Dec 20 22:55 .',
    u'drwxrwxr-x 5 seba seba 4096 Dec 20 22:57 ..',
