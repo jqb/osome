@@ -130,22 +130,12 @@ run
   ```
 
 
-context (not implemented)
--------------------------
+run with context
+----------------
 
   ```python
-  with run('cd /tmp'):
-      run('ls -la')
-
-  # or
-
-  with path('/tmp'):
-      run('ls -la')
-  ```
-	  
-  ```python
-  with run('workon tools'):
-      run('pip install requests')
+  with path('/tmp') as p:
+      p.run('ls -la')
   ```
 
 text

@@ -2,8 +2,19 @@ import os
 import shutil
 import fnmatch
 
+from run import run
 
 class path(unicode):
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+    def run(self, *args, **kwargs):
+        kwargs['cwd'] = self
+        return run(*args, **kwargs)
 
     def __new__(cls, *args):
         if len(args) > 1:
