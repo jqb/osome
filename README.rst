@@ -166,7 +166,7 @@ text
    black, red, blue and green
 
 
-Based On/Inspired By
+based on/inspired by
 --------------------
 
 * http://www.ruby-doc.org/stdlib-1.9.3/libdoc/fileutils/rdoc/index.html
