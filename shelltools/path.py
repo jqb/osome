@@ -6,6 +6,9 @@ from run import run
 
 class path(unicode):
 
+    def __call__(self, *args):
+        return self / path(*args)
+
     def __enter__(self):
         return self
 
