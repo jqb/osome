@@ -96,12 +96,12 @@ path
    >>> path('dir2').rm().exists()
    False 
 
+
+Not implemented
    
-   Not implemented
-   
-   * path('/home/seba/test').split() -> list ? path?
-   * path('/home/seba').cp(r=False, target=path|string) -> path | list?
-   * path('/home/seba').ln(s=True, target=path|string) -> path | list?
+* path('/home/seba/test').split() -> list ? path?
+* path('/home/seba').cp(r=False, target=path|string) -> path | list?
+* path('/home/seba').ln(s=True, target=path|string) -> path | list?
 
 run
 ---
