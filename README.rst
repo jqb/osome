@@ -166,6 +166,6 @@ text
 links
 -----
 
-  * http://www.ruby-doc.org/stdlib-1.9.3/libdoc/fileutils/rdoc/index.html
-  * https://github.com/kennethreitz/clint
-  * https://github.com/jaraco/path.py
+* http://www.ruby-doc.org/stdlib-1.9.3/libdoc/fileutils/rdoc/index.html
+* https://github.com/kennethreitz/clint
+* https://github.com/jaraco/path.py
