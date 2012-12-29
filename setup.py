@@ -7,7 +7,7 @@ The bucket of python shell helpers, no dependencies, simple API.
 """
 
 long_description = open(
-    os.path.join(os.path.dirname(__file__), 'README.md')
+    os.path.join(os.path.dirname(__file__), 'README.rst')
 ).read()
 
 version = open(

@@ -17,20 +17,22 @@ python-shelltools (in development)
 	  * text_list
 	  * wrap
 
+
 path
 ----
-	
-   ```bash
+
+.. code-block:: bash
+
    $ ls -la 
    total 20
    drwxrwxr-x 3 seba seba 4096 Dec 20 22:37 .
    drwxrwxr-x 5 seba seba 4096 Dec 20 22:38 ..
    drwxrwxr-x 2 seba seba 4096 Dec 20 22:37 dir
    -rw-rw-r-- 1 seba seba    0 Dec 20 22:37 file
-   ```
 
    
-   ```python
+.. code-block:: python
+
    >>> path('.')
    .
    
@@ -89,7 +91,7 @@ path
    
    >>> path('dir2').rm().exists()
    False 
-   ```
+
    
    Not implemented
    
@@ -100,7 +102,8 @@ path
 run
 ---
 
-  ```python
+.. code-block:: python
+
   >>> from shelltools import run
 
   >>> print run('uname -r')
@@ -127,25 +130,27 @@ run
    u'drwxrwxr-x 5 seba seba 4096 Dec 20 22:57 ..',
    u'drwxrwxr-x 2 seba seba 4096 Dec 20 22:37 dir',
    u'-rw-rw-r-- 1 seba seba    0 Dec 20 22:52 file']
-  ```
 
 
 context
 -------
 
-  ```python
+.. code-block:: python
+
   with path('/tmp') as p:
       print p.run('ls -la')
-	  
-	  (p / path('new_directory')).mkdir()
+      	  
+
+	  (p / 'new_directory').mkdir()
 	  
 	  (p / 'empty_file').touch()
-  ```
 
+	  
 text
 ----
    
-   ```python
+.. code-block:: python
+
    >>> print wrap("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin ", 30)
    Lorem ipsum dolor sit amet,
    consectetur adipiscing elit.
@@ -156,7 +161,7 @@ text
    
    >>> print text_list(["black", "red", "blue", "green"], "and")
    black, red, blue and green
-   ```
+
 
 links
 -----
