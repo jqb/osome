@@ -6,20 +6,20 @@ This lib is development, nothing interesting here yet.
   
 Python2.7 only (for now).
 
-* shelltools: (shell)
+- shelltools: (shell)
 
-  * path - path wraper around all methods related to path manipulation
-  * run - subprocess wrapper
-  * text: - strings helper functions
+  - path - path wraper around all methods related to path manipulation
+  - run - subprocess wrapper
+  - text: - strings helper functions
 
-     * text_list
-     * wrap
+    - text_list
+    - wrap
 
-  * ui: - halper to create better text shell, let's steal from clint for now
+  - ui: - halper to create better text shell, let's steal from clint for now
 
-     * progress
-     * color
-     * indent
+    - progress
+    - color
+    - indent
 
 
 path
