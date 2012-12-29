@@ -1,21 +1,21 @@
 python-shelltools (in development)
 ==================================
 
-  The bucket of python shell helpers, no dependencies, simple API. 
-  This lib is development, nothing interesting here yet. 
+The bucket of python shell helpers, no dependencies, simple API. 
+This lib is development, nothing interesting here yet. 
   
-  Python2.7 only (for now).
+Python2.7 only (for now).
 
-  * shelltools: (shell)
-	* path - path wraper around all methods related to path manipulation
-	* run - subprocess wrapper
-	* ui: - halper to create better text shell, let's steal from clint for now
-	  * progress
-	  * color
-	  * indent
-	* text: - helper function to manipulate
-	  * text_list
-	  * wrap
+* shelltools: (shell)
+  * path - path wraper around all methods related to path manipulation
+  * run - subprocess wrapper
+  * text: - strings helper functions
+     * text_list
+     * wrap
+  * ui: - halper to create better text shell, let's steal from clint for now
+     * progress
+     * color
+     * indent
 
 
 path
