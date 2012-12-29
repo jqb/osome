@@ -166,8 +166,8 @@ text
    black, red, blue and green
 
 
-links
------
+Based On/Inspired By
+--------------------
 
 * http://www.ruby-doc.org/stdlib-1.9.3/libdoc/fileutils/rdoc/index.html
 * https://github.com/kennethreitz/clint
