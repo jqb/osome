@@ -1,24 +1,15 @@
 # -*- coding: utf-8 -*-
-import os
 from setuptools import setup, find_packages
+from shelltools import path
 
-description = """
-The bucket of python shell helpers, no dependencies, simple API.
-"""
+description = "The bucket of python shell helpers, no dependencies, simple API."
 
-long_description = open(
-    os.path.join(os.path.dirname(__file__), 'README.rst')
-).read()
+project = path(__file__).dirname()
 
-version = open(
-    os.path.join(os.path.dirname(__file__), 'VERSION')
-).read()
+long_description = (project / 'README.rst').open("r").read()
+version = (project / 'VERSION').open("r").read()
+license = (project / 'LICENSE').open("r").read()
 
-license = open(
-    os.path.join(os.path.dirname(__file__), 'LICENSE')
-).read()
-
-from shelltools import run
 
 setup(name='shelltools',
       version=version,
