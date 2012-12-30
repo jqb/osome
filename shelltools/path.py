@@ -24,17 +24,35 @@ class path(unicode):
             return unicode.__new__(path, cls.join(*args))
         return unicode.__new__(path, *args)
 
+    def absolute(self):
+        return path(os.path.dirname(self))
+
+    def basename(self):
+        return path(os.path.basename(self))
+
+    def dir(self):
+        return path(os.path.abspath(self))
+
+    def a_time(self):
+        return os.path.getatime(self)
+
+    def m_time(self):
+        return os.path.getmtime(self)
+
+    def size(self):
+        return os.path.size(self)
+
     def exists(self):
         return os.path.exists(self)
-
-    def absolute(self):
-        return path(os.path.abspath(self))
 
     def is_dir(self):
         return os.path.isdir(self)
 
     def is_file(self):
         return os.path.isfile(self)
+
+    def is_link(self):
+        return os.path.islink(self)
 
     def mkdir(self, p=False):
         if p:
