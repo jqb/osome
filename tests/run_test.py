@@ -1,8 +1,24 @@
+import sys
 from shelltools import run
 
 
+# dafault commands
+class commands:
+    ls = 'ls -la'
+    rm = 'rm -r'
+    more = 'more'
+
+
+# override commands for windows plaftorm
+if sys.platform.startswith('win'):
+    class commands:
+        ls = 'dir'
+        rm = 'rmdir'
+        more = 'more'
+
+
 def test_run():
-    output = run('ls -la')
+    output = run(commands.ls)
 
     assert output.lines
     assert output
@@ -15,19 +31,20 @@ def test_run():
 
 
 def test_stdout():
-    assert run('ls -la').stdout.lines
-    assert run('ls -la').stdout
+    assert run(commands.ls).stdout.lines
+    assert run(commands.ls).stdout
 
 
 def test_stderr():
-    assert run('rm not_existing_directory').stderr
-    assert run('rm not_existing_directory').stderr.lines
+    assert run('%s not_existing_directory' % commands.rm).stderr
+    assert run('%s not_existing_directory' % commands.rm).stderr.lines
 
 
 def test_status():
-    assert run('ls -la').status == 0
-    assert run('rm not_existing_directory').status == 1
+    assert run(commands.ls).status == 0
+    assert run('%s not_existing_directory' % commands.rm).status != 0  # win workaround
 
 
 def test_pipe():
-    assert run('ls -la', 'wc -l').status == 0
+    assert run(commands.ls, commands.more).status == 0
+

@@ -172,3 +172,15 @@ based on/inspired by
 * http://www.ruby-doc.org/stdlib-1.9.3/libdoc/fileutils/rdoc/index.html
 * https://github.com/kennethreitz/clint
 * https://github.com/jaraco/path.py
+
+
+author
+------
+
+* Sebastian (sebastian.pawlus@gmail.com)
+
+
+contributors
+------------
+
+* Jakub (kuba.janoszek@gmail.com)

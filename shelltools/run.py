@@ -1,10 +1,41 @@
 import os
 import shlex
+import locale
 import subprocess
 
 
-class std_output(unicode):
+class CrossPlatform(object):
+    def _process(self, command, cwd, env, shell=False):
+        return subprocess.Popen(
+            shlex.split(command),
+            universal_newlines = True,
+            shell              = shell,
+            cwd                = cwd,
+            env                = env,
+            stdin              = subprocess.PIPE,
+            stdout             = subprocess.PIPE,
+            stderr             = subprocess.PIPE,
+            bufsize            = 0,
+        )
 
+    def posix_process(self, command, cwd, env, shell=False):
+        return self._process(command, cwd, env, shell=shell)
+
+    def nt_process(self, command, cwd, env, shell=True):
+        return self._process(command, cwd, env, shell=shell)
+
+    default_process = posix_process
+
+    def process(self, *args, **kwargs):
+        function = getattr(self, "%s_process" % os.name, self.default_process)
+        return function(*args, **kwargs)
+
+    @classmethod
+    def system_encoding(cls):
+        return locale.getdefaultlocale()[1]
+
+
+class std_output(unicode):
     @property
     def lines(self):
         return self.split("\n")
@@ -15,6 +46,7 @@ class std_output(unicode):
 
 
 class run(std_output):
+    _plaftorm = CrossPlatform()
 
     def __new__(cls, *args, **kwargs):
 
@@ -23,30 +55,22 @@ class run(std_output):
 
         cwd = kwargs.get('cwd')
         data = kwargs.get('data')
+        system_encoding = cls._plaftorm.system_encoding()
 
         for command in args:
+            process = cls._plaftorm.process(command, cwd, env)
 
-            process = subprocess.Popen(
-                shlex.split(command),
-                universal_newlines=True,
-                shell=False,
-                cwd=cwd,
-                env=env,
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                bufsize=0,
+            stdout, stderr = process.communicate(
+                data.encode(system_encoding) if data else data
             )
-
-            stdout, stderr = process.communicate(data)
 
             stdout = stdout.rstrip("\n")
             stderr = stderr.rstrip("\n")
 
-            obj = std_output.__new__(run, stdout)
+            obj = std_output.__new__(run, stdout, system_encoding)
 
-            obj.stdout = std_output(stdout)
-            obj.stderr = std_output(stderr)
+            obj.stdout = std_output(stdout, system_encoding)
+            obj.stderr = std_output(stderr, system_encoding)
             obj.status = process.returncode
             obj.command = command
 
