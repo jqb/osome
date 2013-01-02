@@ -25,13 +25,13 @@ class path(unicode):
         return unicode.__new__(path, *args)
 
     def absolute(self):
-        return path(os.path.dirname(self))
+        return path(os.path.abspath(self))
 
     def basename(self):
         return path(os.path.basename(self))
 
     def dir(self):
-        return path(os.path.abspath(self))
+        return path(os.path.dirname(self))
 
     def a_time(self):
         return os.path.getatime(self)
