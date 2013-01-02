@@ -4,7 +4,7 @@ from shelltools import path
 
 description = "The bucket of python shell helpers, no dependencies, simple API."
 
-project = path(__file__).dirname()
+project = path(__file__).dir()
 
 long_description = (project / 'README.rst').open("r").read()
 version = (project / 'VERSION').open("r").read()
