@@ -143,8 +143,10 @@ context
 
   with path('/tmp') as p:
       print p.run('ls -la')
+
+      p('new_directory1').mkdir()
       	  
-      (p / 'new_directory').mkdir()
+      (p / 'new_directory2').mkdir()
 	  
       (p / 'empty_file').touch()
 
