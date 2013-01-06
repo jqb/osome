@@ -67,7 +67,9 @@ class run(std_output):
             stdout = stdout.rstrip("\n")
             stderr = stderr.rstrip("\n")
 
-            obj = std_output.__new__(run, stdout, system_encoding)
+            out = stdout if stdout else stderr
+
+            obj = std_output.__new__(run, out, system_encoding)
 
             obj.stdout = std_output(stdout, system_encoding)
             obj.stderr = std_output(stderr, system_encoding)
