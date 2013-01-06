@@ -41,7 +41,7 @@ class std_output(unicode):
         return self.split("\n")
 
     @property
-    def q_lines(self):
+    def qlines(self):
         return [line.split() for line in self.split("\n")]
 
 
