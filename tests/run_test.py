@@ -26,8 +26,8 @@ def test_run():
     assert isinstance(output, unicode)
     assert isinstance(output.lines, list)
 
-    assert isinstance(output.q_lines, list)
-    assert isinstance(output.q_lines[0], list)
+    assert isinstance(output.qlines, list)
+    assert isinstance(output.qlines[0], list)
 
 
 def test_stdout():
