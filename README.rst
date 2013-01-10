@@ -40,8 +40,8 @@ path
    >>> path('.')
    .
    
-   >>> path('.', 'dir', 'file')
    u'./dir/file'
+   >>> path('.', 'dir', 'file')
    
    >>> path('.').is_dir()
    True
@@ -96,6 +96,15 @@ path
    >>> path('dir2').rm().exists()
    False 
 
+   >>> path('dir2').cp('dir_copy')
+   u'dir_copy'
+
+   >>> path('file1').cp('file_copy')
+   u'file_copy'
+
+   >>> path('file1').cp('file_copy').exists()
+   True
+
 
 Not implemented
    
@@ -116,7 +125,7 @@ run
   >>> print run('uname -r').stdout
   3.7.0-7-generic
 
-  >>> print run('rm not_existing_directory').stdout
+  >>> print run('rm not_existing_directory').stderr
   rm: cannot remove `not_existing_directory': No such file or directory
 
   >>> print run('ls -la', 'wc -l')
