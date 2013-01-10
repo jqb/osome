@@ -19,6 +19,12 @@ file_1_path = os.path.join(root, file_1)
 file_2_path = os.path.join(root, file_2)
 file_list = [file_1, file_2]
 
+file_3 = 'file_3'
+file_4 = 'file_4'
+file_3_path = os.path.join(root, dir_1, file_3)
+file_4_path = os.path.join(root, dir_2, file_4)
+
+
 
 def setup_function(function):
     os.mkdir(root)
@@ -98,12 +104,12 @@ def test_rm():
     assert not os.path.exists(dir_2_path)
 
 
-# def test_cp():
-#     dir_location = os.path.join(dir_2_path, 'xxx')
-#     os.mkdir(dir_location)
+def test_cp():
+    file_copy = path(file_1_path).cp(os.path.join(root,'file_copy'))
+    assert os.path.exists(file_copy)
 
-#     # with pytest.raises(IOError):
-#     path(dir_2_path).cp(dir_1_path)
+    dir_copy = path(dir_1_path).cp(os.path.join(root,'dir_copy'))
+    assert os.path.exists(dir_copy)
 
 
 def test_touch():

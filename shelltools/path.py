@@ -72,9 +72,11 @@ class path(unicode):
         return self
 
     def cp(self, target, r=False):
-        # len(self.ls)
-        # if not r:
-        shutil.copy(self, target)
+        if self.is_dir():
+            shutil.copytree(self, target)
+        else:
+            shutil.copy(self, target)
+        return path(target)
 
     def touch(self):
         open(self, "a")
