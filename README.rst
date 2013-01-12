@@ -107,11 +107,14 @@ path
    >>> path('file1').cp('file_copy').exists()
    True
 
+   Path is also a instance of basestring so all methods implemented on (string)[http://docs.python.org/2/library/stdtypes.html#string-methods] should work as well.
 
-Not implemented
-   
-* path('/home/seba/test').split() -> list ? path?
-* path('/home/seba').ln(s=True, target=path|string) -> path | list?
+   >> path('.').absolute().split('/')
+   [u'', u'home', u'user', u'Projects', u'python-shelltools']
+
+   >> path('/home/user/test_tmp_directory').replace('_', '-')
+   path('/home/user/test_tmp_directory').replace('_', '-')
+
 
 run
 ---

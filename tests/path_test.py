@@ -43,7 +43,7 @@ def teardown_function(function):
 
 def test_path():
     assert path(root, file_1).exists()
-    assert not path(root, file_1, 'xxx').exists()
+    assert not path(root, file_1, 'xxxss').exists()
 
 def test_exists():
     assert path(dir_1_path).exists()
@@ -68,6 +68,33 @@ def test_is_file():
 
     assert not path(dir_1_path).is_file()
     assert not path(dir_2_path).is_file()
+
+
+def test_ln_s():
+    symlink = path(file_1_path).ln(os.path.join('xxx','symlink'))
+
+    assert symlink.exists()
+    assert symlink.is_link()
+
+
+def test_ln_hard():
+    symlink = path(file_1_path).ln(os.path.join('xxx','symlink'), s=False)
+
+    assert symlink.exists()
+    assert not symlink.is_link()
+
+
+def test_unlink():
+    target = os.path.join('xxx','symlink')
+
+    os.symlink(
+        os.path.realpath(file_1_path),
+        target
+    )
+
+    assert path(target).exists()
+    path(target).unlink()
+    assert not path(target).exists()
 
 
 def test_mkdir():

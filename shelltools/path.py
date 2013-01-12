@@ -78,6 +78,17 @@ class path(unicode):
             shutil.copy(self, target)
         return path(target)
 
+    def ln(self, target, s=True):
+        if s:
+            os.symlink(os.path.realpath(self), target)
+        else:
+            os.link(os.path.realpath(self), target)
+        return path(target)
+
+    def unlink(self):
+        os.unlink(self)
+        return self
+
     def touch(self):
         open(self, "a")
         return self
