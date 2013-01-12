@@ -186,10 +186,8 @@ Test
 
 .. image:: https://api.travis-ci.org/xando/python-shelltools.png
 
-Tests are implemented with `py.tests<http://pytest.org/latest/>`_, to run:
-
-External hyperlinks, like `Python
-<http://www.python.org/>`_.
+Tests are implemented with `py.tests 
+<http://pytest.org/>`_, to run:
 
 .. code-block:: bash
 
