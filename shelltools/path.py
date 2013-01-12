@@ -26,7 +26,7 @@ class pathmeta(type):
             value = getattr(_unicode, method_name)
 
             if all([callable(value),
-                    method_name != '__new__',
+                    not method_name.startswith('__'),
                     method_name not in local]):
 
                 local[method_name] = cls.str_to_path(value)
