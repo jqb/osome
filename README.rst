@@ -6,7 +6,9 @@ https://github.com/xando/python-shelltools
 The bucket of python shell helpers, no dependencies, simple API.
 This lib is development, nothing interesting here yet.
 
-Python2.7 only (for now).
+* Python2.6
+* Python2.7
+* PyPy1.9
 
 - shelltools: (shell)
 
