@@ -109,10 +109,10 @@ path
 
    Path is also a instance of basestring so all methods implemented on (string)[http://docs.python.org/2/library/stdtypes.html#string-methods] should work as well.
 
-   >> path('.').absolute().split('/')
+   >>> path('.').absolute().split('/')
    [u'', u'home', u'user', u'Projects', u'python-shelltools']
 
-   >> path('/home/user/test_tmp_directory').replace('_', '-')
+   >>> path('/home/user/test_tmp_directory').replace('_', '-')
    path('/home/user/test_tmp_directory').replace('_', '-')
 
 
