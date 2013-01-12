@@ -1,10 +1,42 @@
 import os
+import copy
 import shutil
 import fnmatch
 
 from run import run
 
+
+class pathmeta(type):
+
+    @classmethod
+    def str_to_path(cls, func):
+
+        def decorator(*args, **kwargs):
+            value = func(*args, **kwargs)
+
+            if type(value) == unicode or type(value) == str:
+                return path(value)
+
+            return value
+        return decorator
+
+    def __new__(cls, name, bases, local):
+        _unicode = bases[0]
+        for method_name in _unicode.__dict__:
+            value = getattr(_unicode, method_name)
+
+            if callable(value) and \
+               method_name != '__new__' and \
+               method_name not in local:
+
+                local[method_name] = cls.str_to_path(value)
+
+        return type.__new__(cls, name, bases, local)
+
+
 class path(unicode):
+
+    __metaclass__ = pathmeta
 
     def __call__(self, *args):
         return self / path(*args)
@@ -21,8 +53,8 @@ class path(unicode):
 
     def __new__(cls, *args):
         if len(args) > 1:
-            return unicode.__new__(path, cls.join(*args))
-        return unicode.__new__(path, *args)
+            return super(path, cls).__new__(path, cls.join(*args))
+        return super(path, cls).__new__(path, *args)
 
     def absolute(self):
         return path(os.path.abspath(self))

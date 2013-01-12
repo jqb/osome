@@ -190,8 +190,10 @@ def test__div__():
     joined_path = path(root) / path(file_1) / "xxx"
     assert not joined_path.exists()
 
-
 def test_join():
     assert path.join(root, file_1).exists()
     assert not path.join(root, file_1, 'xxx').exists()
 
+def test_base_methods():
+    assert isinstance(path("/home/xand/file_with_file").replace("_", "-"), path)
+    assert isinstance(path("/home/xand/file_with_file").upper(), path)
