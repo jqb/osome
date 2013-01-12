@@ -3,9 +3,9 @@ python-shelltools (in development)
 
 https://github.com/xando/python-shelltools
 
-The bucket of python shell helpers, no dependencies, simple API. 
-This lib is development, nothing interesting here yet. 
-  
+The bucket of python shell helpers, no dependencies, simple API.
+This lib is development, nothing interesting here yet.
+
 Python2.7 only (for now).
 
 - shelltools: (shell)
@@ -29,74 +29,74 @@ path
 
 .. code-block:: bash
 
-   $ ls -la 
+   $ ls -la
    total 20
-   drwxrwxr-x 3 seba seba 4096 Dec 20 22:37 .
-   drwxrwxr-x 5 seba seba 4096 Dec 20 22:38 ..
-   drwxrwxr-x 2 seba seba 4096 Dec 20 22:37 dir
-   -rw-rw-r-- 1 seba seba    0 Dec 20 22:37 file
+   drwxrwxr-x 3 user user 4096 Dec 20 22:37 .
+   drwxrwxr-x 5 user user 4096 Dec 20 22:38 ..
+   drwxrwxr-x 2 user user 4096 Dec 20 22:37 dir
+   -rw-rw-r-- 1 user user    0 Dec 20 22:37 file
 
-   
+
 .. code-block:: python
 
    >>> path('.')
    .
-   
+
    u'./dir/file'
    >>> path('.', 'dir', 'file')
-   
+
    >>> path('.').is_dir()
    True
-   
+
    >>> path('.').is_file()
    False
-   
+
    >>> path('.').exists()
    True
-   
+
    >>> for e in path('.'):
    ...     print e
-   'dir' 
+   'dir'
    'file'
-   
+
    >>> path('.').ls()
    [u'dir', u'file']
-   
+
    >>> path('.').ls_files()
    [u'file']
 
    >>> path('.').ls_dirs()
    [u'dir']
-   
+
    >>> path('.').walk()
    <generator object walk at 0x7f7ff6f3c960>
-   
+
    >>> path('.') / path('file')
    u'./file'
 
    >>> (path('.') / path('file')).exists()
    True
-   
+
    >>> path.join('.', 'file')
    u'./file'
-   
+
    >>> path.join('.', 'file').exists()
    True
-   
+
    >>> path.join('.', 'file').open('w')
    <open file u'./file', mode 'w' at 0x1b23660>
-   
+
    >>> path('file2').touch().exists()
    True
-   
+
    >>> path('dir2').mkdir().exists()
    True
-   
+
    >>> path('file2').rm().exists()
    False
-   
+
    >>> path('dir2').rm().exists()
-   False 
+   False
 
    >>> path('dir2').cp('dir_copy')
    u'dir_copy'
@@ -140,13 +140,13 @@ run
 
   >>> run('ls -la', 'wc -l', 'wc -c')
   ls -la | wc -l | wc -c
-  
+
   >>> print run('ls -la').stdout.lines
   [u'total 20',
-   u'drwxrwxr-x 3 seba seba 4096 Dec 20 22:55 .',
-   u'drwxrwxr-x 5 seba seba 4096 Dec 20 22:57 ..',
-   u'drwxrwxr-x 2 seba seba 4096 Dec 20 22:37 dir',
-   u'-rw-rw-r-- 1 seba seba    0 Dec 20 22:52 file']
+   u'drwxrwxr-x 3 user user 4096 Dec 20 22:55 .',
+   u'drwxrwxr-x 5 user user 4096 Dec 20 22:57 ..',
+   u'drwxrwxr-x 2 user user 4096 Dec 20 22:37 dir',
+   u'-rw-rw-r-- 1 user user    0 Dec 20 22:52 file']
 
 
 context
@@ -158,25 +158,25 @@ context
       print p.run('ls -la')
 
       p('new_directory1').mkdir()
-      	  
+
       (p / 'new_directory2').mkdir()
-	  
+
       (p / 'empty_file').touch()
 
-	  
+
 text
 ----
-   
+
 .. code-block:: python
 
    >>> print wrap("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin ", 30)
    Lorem ipsum dolor sit amet,
    consectetur adipiscing elit.
-   Duis sollicitudin 
+   Duis sollicitudin
 
    >>> print text_list(["black", "red", "blue", "green"])
    black, red, blue or green
-   
+
    >>> print text_list(["black", "red", "blue", "green"], "and")
    black, red, blue and green
 
@@ -192,7 +192,7 @@ based on/inspired by
 author
 ------
 
-* Sebastian (sebastian.pawlus@gmail.com)
+* Sebastina Pawluś (sebastian.pawlus@gmail.com)
 
 
 contributors
