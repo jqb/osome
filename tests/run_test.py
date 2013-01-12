@@ -42,9 +42,9 @@ def test_stderr():
 
 def test_status():
     assert run(commands.ls).status == 0
-    assert run('%s not_existing_directory' % commands.rm).status != 0  # win workaround
+    # win workaround
+    assert run('%s not_existing_directory' % commands.rm).status != 0
 
 
 def test_pipe():
     assert run(commands.ls, commands.more).status == 0
-

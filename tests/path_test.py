@@ -25,7 +25,6 @@ file_3_path = os.path.join(root, dir_1, file_3)
 file_4_path = os.path.join(root, dir_2, file_4)
 
 
-
 def setup_function(function):
     os.mkdir(root)
 
@@ -40,10 +39,10 @@ def teardown_function(function):
     shutil.rmtree(root)
 
 
-
 def test_path():
     assert path(root, file_1).exists()
     assert not path(root, file_1, 'xxxss').exists()
+
 
 def test_exists():
     assert path(dir_1_path).exists()
@@ -71,21 +70,21 @@ def test_is_file():
 
 
 def test_ln_s():
-    symlink = path(file_1_path).ln(os.path.join('xxx','symlink'))
+    symlink = path(file_1_path).ln(os.path.join('xxx', 'symlink'))
 
     assert symlink.exists()
     assert symlink.is_link()
 
 
 def test_ln_hard():
-    symlink = path(file_1_path).ln(os.path.join('xxx','symlink'), s=False)
+    symlink = path(file_1_path).ln(os.path.join('xxx', 'symlink'), s=False)
 
     assert symlink.exists()
     assert not symlink.is_link()
 
 
 def test_unlink():
-    target = os.path.join('xxx','symlink')
+    target = os.path.join('xxx', 'symlink')
 
     os.symlink(
         os.path.realpath(file_1_path),
@@ -132,10 +131,10 @@ def test_rm():
 
 
 def test_cp():
-    file_copy = path(file_1_path).cp(os.path.join(root,'file_copy'))
+    file_copy = path(file_1_path).cp(os.path.join(root, 'file_copy'))
     assert os.path.exists(file_copy)
 
-    dir_copy = path(dir_1_path).cp(os.path.join(root,'dir_copy'))
+    dir_copy = path(dir_1_path).cp(os.path.join(root, 'dir_copy'))
     assert os.path.exists(dir_copy)
 
 
@@ -145,6 +144,7 @@ def test_touch():
 
     assert os.path.exists(path_string)
     assert os.path.isfile(path_string)
+
 
 def test_ls():
     dir_content = path(root).ls()
@@ -169,13 +169,16 @@ def test_ls_dirs():
     assert set(dir_list).issubset(dir_content)
     assert not set(file_list).issubset(dir_content)
 
+
 def test_walk():
     dir_content = path(root).walk()
     assert len([e for e in dir_content]) == len(dir_list + file_list)
 
+
 def test_iter():
     dir_content = path(root)
     assert len([e for e in dir_content]) == len(dir_list + file_list)
+
 
 def test__div__():
     joined_path = path(root) / path(file_1)
@@ -189,6 +192,7 @@ def test__div__():
 
     joined_path = path(root) / path(file_1) / "xxx"
     assert not joined_path.exists()
+
 
 def test_join():
     assert path.join(root, file_1).exists()

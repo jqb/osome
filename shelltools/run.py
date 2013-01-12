@@ -8,14 +8,14 @@ class CrossPlatform(object):
     def _process(self, command, cwd, env, shell=False):
         return subprocess.Popen(
             shlex.split(command),
-            universal_newlines = True,
-            shell              = shell,
-            cwd                = cwd,
-            env                = env,
-            stdin              = subprocess.PIPE,
-            stdout             = subprocess.PIPE,
-            stderr             = subprocess.PIPE,
-            bufsize            = 0,
+            universal_newlines=True,
+            shell=shell,
+            cwd=cwd,
+            env=env,
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            bufsize=0,
         )
 
     def posix_process(self, command, cwd, env, shell=False):

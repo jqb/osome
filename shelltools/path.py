@@ -25,9 +25,9 @@ class pathmeta(type):
         for method_name in _unicode.__dict__:
             value = getattr(_unicode, method_name)
 
-            if callable(value) and \
-               method_name != '__new__' and \
-               method_name not in local:
+            if all([callable(value),
+                    method_name != '__new__',
+                    method_name not in local]):
 
                 local[method_name] = cls.str_to_path(value)
 
@@ -126,7 +126,9 @@ class path(unicode):
         return self
 
     def ls(self, pattern="*", sort=lambda e: (not e.is_dir(), e)):
-        content = [path(e) for e in os.listdir(self) if fnmatch.fnmatch(e, pattern)]
+        content = [
+            path(e) for e in os.listdir(self) if fnmatch.fnmatch(e, pattern)
+        ]
         return sorted(content, key=sort)
 
     def ls_files(self, patern="*"):
