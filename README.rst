@@ -181,8 +181,8 @@ text
    black, red, blue and green
 
 
-Test
-----
+Tests
+-----
 
 .. image:: https://api.travis-ci.org/xando/python-shelltools.png
 
