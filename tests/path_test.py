@@ -194,6 +194,14 @@ def test_join():
     assert path.join(root, file_1).exists()
     assert not path.join(root, file_1, 'xxx').exists()
 
+
 def test_base_methods():
-    assert isinstance(path("/home/xand/file_with_file").replace("_", "-"), path)
-    assert isinstance(path("/home/xand/file_with_file").upper(), path)
+
+    path_1 = path("/tmp/file with spaces").replace(" ", "-")
+    path_2 = path("smallfile").upper()
+
+    assert isinstance(path_1, path)
+    assert path_1 == '/tmp/file-with-spaces'
+
+    assert isinstance(path_2, path)
+    assert path_2 == 'SMALLFILE'
