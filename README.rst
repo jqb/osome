@@ -184,7 +184,10 @@ text
 Tests
 -----
 
-.. image:: https://api.travis-ci.org/xando/python-shelltools.png
+.. image:: https://api.travis-ci.org/xando/python-shelltools.png?branch=master
+
+Travis CI, https://travis-ci.org/xando/python-shelltools
+
 
 Tests are implemented with `py.tests 
 <http://pytest.org/>`_, to run:
