@@ -1,4 +1,5 @@
 import os
+import sys
 import shlex
 import locale
 import subprocess
@@ -47,8 +48,16 @@ class std_output(base_string_class):
         return [line.split() for line in self.split("\n")]
 
 
+class runmeta(type):
+    @property
+    def stdin(cls):
+        return sys.stdin.read()
+
+
 class run(std_output):
     _plaftorm = CrossPlatform()
+
+    __metaclass__ = runmeta
 
     def __new__(cls, *args, **kwargs):
 

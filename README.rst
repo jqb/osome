@@ -157,6 +157,18 @@ run
    u'-rw-rw-r-- 1 user user    0 Dec 20 22:52 file']
 
 
+To use pipe from the shell.
+
+.. code-block:: python
+  
+  from shelltools import run
+  run('grep something', data=run.stdin)
+
+.. code-block:: bash
+  
+  $ ps aux | python script.py
+
+
 context
 -------
 
