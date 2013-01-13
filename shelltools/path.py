@@ -34,7 +34,7 @@ class pathmeta(type):
         return type.__new__(cls, name, bases, local)
 
 
-class path(pathmeta('base', (base_string_class, ), {})):
+class path(pathmeta('base_path', (base_string_class, ), {})):
 
     def __call__(self, *args):
         return self / path(*args)

@@ -22,7 +22,7 @@ class runmeta(type):
         return sys.stdin.read()
 
 
-class run(runmeta('base', (std_output, ), {})):
+class run(runmeta('base_run', (std_output, ), {})):
 
     @classmethod
     def create_process(cls, command, cwd, env, shell=False):
