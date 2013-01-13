@@ -1,6 +1,6 @@
 import sys
 
-if sys.version_info.major < 3:
+if sys.version.startswith('3'):
     base_string_class = unicode
 else:
     base_string_class = str
