@@ -1,4 +1,5 @@
 import os
+import sys
 import shlex
 import locale
 import subprocess
@@ -45,8 +46,16 @@ class std_output(unicode):
         return [line.split() for line in self.split("\n")]
 
 
+class runmeta(type):
+    @property
+    def stdin(cls):
+        return sys.stdin.read()
+
+
 class run(std_output):
     _plaftorm = CrossPlatform()
+
+    __metaclass__ = runmeta
 
     def __new__(cls, *args, **kwargs):
 
@@ -61,7 +70,7 @@ class run(std_output):
             process = cls._plaftorm.process(command, cwd, env)
 
             stdout, stderr = process.communicate(
-                data.encode(system_encoding) if data else data
+                data
             )
 
             stdout = stdout.rstrip("\n")
