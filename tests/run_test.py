@@ -1,29 +1,29 @@
 import sys
-from shelltools import run
+from shelltools import run, base_string_class
 
 
-# dafault commands
-class commands:
+# dafault _commands
+class _commands:
     ls = 'ls -la'
     rm = 'rm -r'
     more = 'more'
 
 
-# override commands for windows plaftorm
+# override _commands for windows plaftorm
 if sys.platform.startswith('win'):
-    class commands:
+    class _commands:
         ls = 'dir'
         rm = 'rmdir'
         more = 'more'
 
 
 def test_run():
-    output = run(commands.ls)
+    output = run(_commands.ls)
 
     assert output.lines
     assert output
 
-    assert isinstance(output, unicode)
+    assert isinstance(output, base_string_class)
     assert isinstance(output.lines, list)
 
     assert isinstance(output.qlines, list)
@@ -31,20 +31,20 @@ def test_run():
 
 
 def test_stdout():
-    assert run(commands.ls).stdout.lines
-    assert run(commands.ls).stdout
+    assert run(_commands.ls).stdout.lines
+    assert run(_commands.ls).stdout
 
 
 def test_stderr():
-    assert run('%s not_existing_directory' % commands.rm).stderr
-    assert run('%s not_existing_directory' % commands.rm).stderr.lines
+    assert run('%s not_existing_directory' % _commands.rm).stderr
+    assert run('%s not_existing_directory' % _commands.rm).stderr.lines
 
 
 def test_status():
-    assert run(commands.ls).status == 0
+    assert run(_commands.ls).status == 0
     # win workaround
-    assert run('%s not_existing_directory' % commands.rm).status != 0
+    assert run('%s not_existing_directory' % _commands.rm).status != 0
 
 
 def test_pipe():
-    assert run(commands.ls, commands.more).status == 0
+    assert run(_commands.ls, _commands.more).status == 0

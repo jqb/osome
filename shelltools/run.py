@@ -3,6 +3,8 @@ import shlex
 import locale
 import subprocess
 
+from shelltools import base_string_class
+
 
 class CrossPlatform(object):
     def _process(self, command, cwd, env, shell=False):
@@ -35,7 +37,7 @@ class CrossPlatform(object):
         return locale.getdefaultlocale()[1]
 
 
-class std_output(unicode):
+class std_output(base_string_class):
     @property
     def lines(self):
         return self.split("\n")
@@ -55,24 +57,21 @@ class run(std_output):
 
         cwd = kwargs.get('cwd')
         data = kwargs.get('data')
-        system_encoding = cls._plaftorm.system_encoding()
 
         for command in args:
             process = cls._plaftorm.process(command, cwd, env)
 
-            stdout, stderr = process.communicate(
-                data.encode(system_encoding) if data else data
-            )
+            stdout, stderr = process.communicate(data)
 
             stdout = stdout.rstrip("\n")
             stderr = stderr.rstrip("\n")
 
             out = stdout if stdout else stderr
 
-            obj = std_output.__new__(run, out, system_encoding)
+            obj = std_output.__new__(run, out)
 
-            obj.stdout = std_output(stdout, system_encoding)
-            obj.stderr = std_output(stderr, system_encoding)
+            obj.stdout = std_output(stdout)
+            obj.stderr = std_output(stderr)
             obj.status = process.returncode
             obj.command = command
 

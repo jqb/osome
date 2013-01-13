@@ -1,9 +1,8 @@
 import os
-import copy
 import shutil
 import fnmatch
 
-from run import run
+from shelltools import run, base_string_class
 
 
 class pathmeta(type):
@@ -14,7 +13,7 @@ class pathmeta(type):
         def decorator(*args, **kwargs):
             value = func(*args, **kwargs)
 
-            if type(value) == unicode or type(value) == str:
+            if isinstance(value, base_string_class):
                 return path(value)
 
             return value
@@ -22,6 +21,7 @@ class pathmeta(type):
 
     def __new__(cls, name, bases, local):
         _unicode = bases[0]
+
         for method_name in _unicode.__dict__:
             value = getattr(_unicode, method_name)
 
@@ -34,7 +34,7 @@ class pathmeta(type):
         return type.__new__(cls, name, bases, local)
 
 
-class path(unicode):
+class path(pathmeta('base_string_class', (base_string_class, ), {})):
 
     __metaclass__ = pathmeta
 
@@ -158,6 +158,8 @@ class path(unicode):
 
     def __div__(self, other):
         return path(os.path.join(self, other))
+
+    __truediv__ = __div__
 
     @classmethod
     def join(cls, *path_list):
