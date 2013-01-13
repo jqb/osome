@@ -1,41 +1,9 @@
 import os
 import sys
 import shlex
-import locale
 import subprocess
 
 from shelltools import base_string_class
-
-
-class CrossPlatform(object):
-    def _process(self, command, cwd, env, shell=False):
-        return subprocess.Popen(
-            shlex.split(command),
-            universal_newlines=True,
-            shell=shell,
-            cwd=cwd,
-            env=env,
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            bufsize=0,
-        )
-
-    def posix_process(self, command, cwd, env, shell=False):
-        return self._process(command, cwd, env, shell=shell)
-
-    def nt_process(self, command, cwd, env, shell=True):
-        return self._process(command, cwd, env, shell=shell)
-
-    default_process = posix_process
-
-    def process(self, *args, **kwargs):
-        function = getattr(self, "%s_process" % os.name, self.default_process)
-        return function(*args, **kwargs)
-
-    @classmethod
-    def system_encoding(cls):
-        return locale.getdefaultlocale()[1]
 
 
 class std_output(base_string_class):
@@ -55,9 +23,22 @@ class runmeta(type):
 
 
 class run(std_output):
-    _plaftorm = CrossPlatform()
 
     __metaclass__ = runmeta
+
+    @classmethod
+    def create_process(cls, command, cwd, env, shell=False):
+        return subprocess.Popen(
+            shlex.split(command),
+            universal_newlines=True,
+            shell=shell,
+            cwd=cwd,
+            env=env,
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            bufsize=0,
+        )
 
     def __new__(cls, *args, **kwargs):
 
@@ -68,7 +49,7 @@ class run(std_output):
         data = kwargs.get('data')
 
         for command in args:
-            process = cls._plaftorm.process(command, cwd, env)
+            process = cls.create_process(command, cwd, env)
 
             stdout, stderr = process.communicate(data)
 
