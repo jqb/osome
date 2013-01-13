@@ -1,3 +1,5 @@
+from shelltools.text.progress import progress
+
 
 def wrap(text, width):
     """
@@ -50,11 +52,7 @@ def text_list(list_, last_word='or'):
         last_word, list_[-1])
 
 
+
 if __name__ == "__main__":
-    text = \
-"""
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin lacinia risus,
-"""
-    print wrap(text, 30)
-    print text_list(["black", "red", "blue", "green"])
-    print text_list(["black", "red", "blue", "green"], "and")
+    pass
+

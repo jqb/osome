@@ -19,6 +19,7 @@ This lib is development, nothing interesting here yet.
 
     - text_list
     - wrap
+    - progress
 
   - ui: - halper to create better text shell, let's steal from clint for now
 
@@ -110,7 +111,7 @@ path
    >>> path('file1').cp('file_copy').exists()
    True
 
-Path is also a instance of basestring so all methods implemented for `string/unicode 
+Path is also a instance of basestring so all methods implemented for `string/unicode
 <http://docs.python.org/2/library/stdtypes.html#string-methods>`_ should work as well.
 
 .. code-block:: python
@@ -160,12 +161,12 @@ run
 To use pipe from the shell.
 
 .. code-block:: python
-  
+
   from shelltools import run
   run('grep something', data=run.stdin)
 
 .. code-block:: bash
-  
+
   $ ps aux | python script.py
 
 
@@ -200,8 +201,29 @@ text
    >>> print text_list(["black", "red", "blue", "green"], "and")
    black, red, blue and green
 
+.. code-block:: python
 
-Tests
+   from shelltools.text import progress
+
+   for i in progress(range(100)):
+       sleep(random() * 0.2)
+
+   for i in progress.dots(range(100)):
+       sleep(random() * 0.2)
+
+   for i in progress.mill(range(100)):
+       sleep(random() * 0.2)
+
+
+.. code-block:: bash
+
+   [#####                           ] 9/100 - 00:00:08
+
+   ...................
+
+   - 51/100
+
+tests
 -----
 
 .. image:: https://api.travis-ci.org/xando/python-shelltools.png?branch=master
@@ -209,7 +231,7 @@ Tests
 Travis CI, https://travis-ci.org/xando/python-shelltools
 
 
-Tests are implemented with `py.tests 
+Tests are implemented with `py.tests
 <http://pytest.org/>`_, to run:
 
 .. code-block:: bash
