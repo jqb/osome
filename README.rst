@@ -125,7 +125,7 @@ Path is also a instance of basestring so all methods implemented for `string/uni
    ['', 'home', 'user', 'Projects', 'python-shelltools']
 
    >>> path('/home/user/test_tmp_directory').replace('_', '-')
-g   '/home/user/test-tmp-directory'
+   '/home/user/test-tmp-directory'
 
    >>> location = path('/home/user/test_tmp_directory')
    >>> location.mv(location.replace('_', '-'))
