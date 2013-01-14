@@ -35,6 +35,37 @@ class pathmeta(type):
 
 
 class path(pathmeta('base_path', (base_string_class, ), {})):
+    """
+    .. code-block:: python
+
+        >>> from shelltools import path
+
+        >>> path('/var/log')
+        /var/log
+
+        >>> path('/var', 'log')
+        /var/log
+
+        >>> path('/var', 'log', 'syslog')
+        /var/log/syslog
+
+
+    Path is also a instance of basestring so all methods implemented for `string/unicode
+    <http://docs.python.org/2/library/stdtypes.html#string-methods>`_ should work as well.
+
+    .. code-block:: python
+
+       >>> path('.').absolute().split('/')
+       ['', 'home', 'user', 'Projects', 'python-shelltools']
+
+       >>> path('/home/user/test_tmp_directory').replace('_', '-')
+       '/home/user/test-tmp-directory'
+
+       >>> location = path('/home/user/test_tmp_directory')
+       >>> location.mv(location.replace('_', '-'))
+
+
+    """
 
     def __call__(self, *args):
         return self / path(*args)
@@ -58,36 +89,68 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         return super(path, cls).__new__(path, *args)
 
     def absolute(self):
+        """
+        """
         return path(os.path.abspath(self))
 
     def basename(self):
+        """
+        """
         return path(os.path.basename(self))
 
     def dir(self):
+        """
+        >>> path('/var/log/syslog').dir()
+        /var/log
+        """
         return path(os.path.dirname(self))
 
     def a_time(self):
+        """
+        """
         return os.path.getatime(self)
 
     def m_time(self):
+        """
+        """
         return os.path.getmtime(self)
 
     def size(self):
+        """
+        """
         return os.path.size(self)
 
     def exists(self):
+        """
+        >>> path('/var/log').exists()
+        True
+        """
         return os.path.exists(self)
 
     def is_dir(self):
+        """
+        >>> path('/var/log').is_dir()
+        True
+        """
         return os.path.isdir(self)
 
     def is_file(self):
+        """
+        >>> path('/var/log/syslog').is_file()
+        False
+        """
         return os.path.isfile(self)
 
     def is_link(self):
+        """
+        """
         return os.path.islink(self)
 
     def mkdir(self, p=False):
+        """
+        >>> path('dir').mkdir().exists()
+        True
+        """
         if p:
             os.makedirs(self)
         else:
@@ -95,6 +158,10 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         return self
 
     def rm(self, p=False):
+        """
+        >>> path('file').rm().exists()
+        False
+        """
         if os.path.isfile(self):
             os.remove(self)
         else:
@@ -105,6 +172,16 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         return self
 
     def cp(self, target, r=False):
+        """
+        >>> path('dir').cp('dir_copy')
+        dir_copy
+
+        >>> path('file1').cp('file_copy')
+        file_copy
+
+        >>> path('file1').cp('file_copy').exists()
+        True
+        """
         if self.is_dir():
             shutil.copytree(self, target)
         else:
@@ -112,6 +189,8 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         return path(target)
 
     def ln(self, target, s=True):
+        """
+        """
         if s:
             os.symlink(os.path.realpath(self), target)
         else:
@@ -119,26 +198,53 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         return path(target)
 
     def unlink(self):
+        """
+        """
         os.unlink(self)
         return self
 
     def touch(self):
+        """
+        >>> path('file').touch().exists()
+        True
+        """
         open(self, "a")
         return self
 
-    def ls(self, pattern="*", sort=lambda e: (not e.is_dir(), e)):
+    def ls(self, pattern="*", sort=None):
+        """
+        >>> path('/var/log').ls()
+        [/var/log/boot.log, /var/log/dmesg, /var/log/faillog, /var/log/kern.log, /var/log/gdm]
+
+        >>> path('/var/log/').ls('*log')
+        [/var/log/boot.log, /var/log/faillog, /var/log/kern.log]
+        """
+        sort = sort or (lambda e: (not e.is_dir(), e))
         content = [
             path(e) for e in os.listdir(self) if fnmatch.fnmatch(e, pattern)
         ]
         return sorted(content, key=sort)
 
-    def ls_files(self, patern="*"):
-        return [e for e in self.ls(patern) if (self / e).is_file()]
+    def ls_files(self, patern="*", sort=None):
+        """
+        >>> path('.').ls_files()
+        [/var/log/boot.log, /var/log/dmesg, /var/log/faillog, /var/log/kern.log]
+        """
+        return [e for e in self.ls(patern, sort) if (self / e).is_file()]
 
-    def ls_dirs(self, patern="*"):
-        return [e for e in self.ls(patern) if (self / e).is_dir()]
+    def ls_dirs(self, patern="*", sort=None):
+        """
+        >>> path('.').ls_dirs()
+        [/var/log/gdm]]
+        """
+        return [e for e in self.ls(patern, sort) if (self / e).is_dir()]
 
-    def walk(self, pattern="*", sort=lambda e: (e.is_dir(), e), r=False):
+    def walk(self, pattern="*", r=False, sort=None):
+        """
+        >>> path('.').walk()
+        <generator object walk at 0x7f7ff6f3c960>
+        """
+        sort = sort or (lambda e: (e.is_dir(), e))
         content = self.ls(pattern=pattern, sort=sort)
         for element in content:
 
@@ -149,15 +255,36 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
                     yield item
 
     def chmod(self, mod):
+        """
+        """
         return self
 
     def open(self, *args, **kwargs):
+        """
+        """
         return open(self, *args, **kwargs)
 
     def __iter__(self):
+        """
+        >>> for e in path('/var/log'):
+        ...     print e
+        /var/log/boot.log
+        /var/log/dmesg
+        /var/log/faillog
+        /var/log/kern.log
+        /var/log/gdm
+        """
         return self.walk()
 
     def __div__(self, other):
+        """
+        >>> path('/var/log') / path('syslog')
+        /var/log/syslog
+        >>> path('/var/log') / 'syslog'
+        /var/log/syslog
+        >>> (path('/var/log') / 'syslog').exists()
+        """
+
         return path(os.path.join(self, other))
 
     __truediv__ = __div__

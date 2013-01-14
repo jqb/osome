@@ -93,7 +93,7 @@ path
    >>> (path('/var/log') / 'syslog').exists()
 
    >>> path('/var/log','syslog').open('r')
-   <open file u'/var/log/syslog', mode 'r' at 0x294c5d0>
+   <open file '/var/log/syslog', mode 'r' at 0x294c5d0>
 
    >>> path('file').touch().exists()
    True
@@ -111,7 +111,7 @@ path
    dir_copy
 
    >>> path('file1').cp('file_copy')
-   u'file_copy'
+   'file_copy'
 
    >>> path('file1').cp('file_copy').exists()
    True
@@ -122,10 +122,10 @@ Path is also a instance of basestring so all methods implemented for `string/uni
 .. code-block:: python
 
    >>> path('.').absolute().split('/')
-   [u'', u'home', u'user', u'Projects', u'python-shelltools']
+   ['', 'home', 'user', 'Projects', 'python-shelltools']
 
    >>> path('/home/user/test_tmp_directory').replace('_', '-')
-   u'/home/user/test-tmp-directory'
+g   '/home/user/test-tmp-directory'
 
    >>> location = path('/home/user/test_tmp_directory')
    >>> location.mv(location.replace('_', '-'))
@@ -156,11 +156,11 @@ run
   ls -la | wc -l | wc -c
 
   >>> print run('ls -la').stdout.lines
-  [u'total 20',
-   u'drwxrwxr-x 3 user user 4096 Dec 20 22:55 .',
-   u'drwxrwxr-x 5 user user 4096 Dec 20 22:57 ..',
-   u'drwxrwxr-x 2 user user 4096 Dec 20 22:37 dir',
-   u'-rw-rw-r-- 1 user user    0 Dec 20 22:52 file']
+  ['total 20',
+   'drwxrwxr-x 3 user user 4096 Dec 20 22:55 .',
+   'drwxrwxr-x 5 user user 4096 Dec 20 22:57 ..',
+   'drwxrwxr-x 2 user user 4096 Dec 20 22:37 dir',
+   '-rw-rw-r-- 1 user user    0 Dec 20 22:52 file']
 
 
 To use pipe from the shell.

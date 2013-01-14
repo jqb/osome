@@ -6,23 +6,9 @@
 Welcome to shelltools's documentation!
 ======================================
 
-Contents:
-
-.. autoclass:: shelltools.run
-
 .. autoclass:: shelltools.path
-   :members:
-   :undoc-members:
-   :inherited-members:
-
-.. autoclass:: shelltools.text
-   :members:
-   :undoc-members:
-   :inherited-members:
-
-
-.. toctree::
-   :maxdepth: 2
+   :members: 
+   :special-members:
 
 
 
