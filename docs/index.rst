@@ -6,7 +6,12 @@
 Welcome to shelltools's documentation!
 ======================================
 
+
 .. autoclass:: shelltools.path
+   :members: 
+   :special-members:
+
+.. autoclass:: shelltools.run
    :members: 
    :special-members:
 
