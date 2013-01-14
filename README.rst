@@ -211,13 +211,13 @@ text
    from shelltools.text import progress
 
    for i in progress(range(100)):
-       sleep(random() * 0.2)
+       sleep( 0.2)
 
    for i in progress.dots(range(100)):
-       sleep(random() * 0.2)
+       sleep(0.2)
 
    for i in progress.mill(range(100)):
-       sleep(random() * 0.2)
+       sleep(0.2)
 
 
 .. code-block:: bash
