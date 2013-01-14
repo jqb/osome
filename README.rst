@@ -35,77 +35,80 @@ path
 
 .. code-block:: bash
 
-   $ ls -la
+   $ ls -la /var/log
    total 20
-   drwxrwxr-x 3 user user 4096 Dec 20 22:37 .
-   drwxrwxr-x 5 user user 4096 Dec 20 22:38 ..
-   drwxrwxr-x 2 user user 4096 Dec 20 22:37 dir
-   -rw-rw-r-- 1 user user    0 Dec 20 22:37 file
+   drwxrwxr-x 3 root root  4096 Dec 20 22:37 .
+   drwxrwxr-x 5 root root  4096 Dec 20 22:38 ..
+   drwxrwxr-x 2 root root  4096 Dec 20 22:37 gdm
+   -rw-rw-r-- 1 root root 11561 Dec 20 22:37 boot.log
+   -rw-rw-r-- 1 root root 11562 Dec 20 22:37 dmesg
+   -rw-rw-r-- 1 root root 11563 Dec 20 22:37 faillog
+   -rw-rw-r-- 1 root root 11564 Dec 20 22:37 kern.log
 
 
 .. code-block:: python
 
-   >>> path('.')
-   .
+   >>> from shelltools import path
 
-   u'./dir/file'
-   >>> path('.', 'dir', 'file')
+   >>> path('/var/log')
+   /var/log
 
-   >>> path('.').is_dir()
+   >>> path('/var', 'log')
+   /var/log
+
+   >>> path('/var/log').exists()
    True
 
-   >>> path('.').is_file()
+   >>> path('/var/log').is_dir()
+   True
+
+   >>> path('/var/log/syslog').is_file()
    False
 
-   >>> path('.').exists()
-   True
-
-   >>> for e in path('.'):
+   >>> for e in path('/var/log'):
    ...     print e
-   'dir'
-   'file'
+   /var/log/boot.log
+   /var/log/dmesg
+   /var/log/faillog
+   /var/log/kern.log
+   /var/log/gdm
 
-   >>> path('.').ls()
-   [u'dir', u'file']
+   >>> path('/var/log').ls()
+   [/var/log/boot.log, /var/log/dmesg, /var/log/faillog, /var/log/kern.log, /var/log/gdm]
 
    >>> path('.').ls_files()
-   [u'file']
+   [/var/log/boot.log, /var/log/dmesg, /var/log/faillog, /var/log/kern.log]
 
    >>> path('.').ls_dirs()
-   [u'dir']
+   [/var/log/gdm]]
 
    >>> path('.').walk()
    <generator object walk at 0x7f7ff6f3c960>
 
-   >>> path('.') / path('file')
-   u'./file'
+   >>> path('/var/log') / path('syslog')
+   /var/log/syslog
+   >>> path('/var/log') / 'syslog'
+   /var/log/syslog
 
-   >>> (path('.') / path('file')).exists()
+   >>> (path('/var/log') / 'syslog').exists()
+
+   >>> path('/var/log','syslog').open('r')
+   <open file u'/var/log/syslog', mode 'r' at 0x294c5d0>
+
+   >>> path('file').touch().exists()
    True
 
-   >>> path.join('.', 'file')
-   u'./file'
-
-   >>> path.join('.', 'file').exists()
+   >>> path('dir').mkdir().exists()
    True
 
-   >>> path.join('.', 'file').open('w')
-   <open file u'./file', mode 'w' at 0x1b23660>
-
-   >>> path('file2').touch().exists()
-   True
-
-   >>> path('dir2').mkdir().exists()
-   True
-
-   >>> path('file2').rm().exists()
+   >>> path('file').rm().exists()
    False
 
-   >>> path('dir2').rm().exists()
+   >>> path('dir').rm().exists()
    False
 
-   >>> path('dir2').cp('dir_copy')
-   u'dir_copy'
+   >>> path('dir').cp('dir_copy')
+   dir_copy
 
    >>> path('file1').cp('file_copy')
    u'file_copy'

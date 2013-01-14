@@ -45,6 +45,9 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
     def __exit__(self, exc_type, exc_value, traceback):
         pass
 
+    def __repr__(self):
+        return self
+
     def run(self, *args, **kwargs):
         kwargs['cwd'] = self
         return run(*args, **kwargs)
