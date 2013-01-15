@@ -4,7 +4,7 @@ python-shelltools (in development)
 https://github.com/xando/python-shelltools
 
 The bucket of python shell helpers, no dependencies, simple API.
-This lib is development, nothing interesting here yet.
+This lib is in development, nothing interesting here yet.
 
 * Python2.6
 * Python2.7
@@ -27,7 +27,7 @@ This lib is development, nothing interesting here yet.
     - color
     - indent
 
-  - args: - halper to handle shell arguments (missing)
+  - args: - helper to handle shell arguments (missing)
 
 
 path
@@ -75,6 +75,9 @@ path
 
    >>> path('/var/log').ls()
    [/var/log/boot.log, /var/log/dmesg, /var/log/faillog, /var/log/kern.log, /var/log/gdm]
+
+   >>> path('/var/log/').ls('*log')
+   [/var/log/boot.log, /var/log/faillog, /var/log/kern.log]
 
    >>> path('.').ls_files()
    [/var/log/boot.log, /var/log/dmesg, /var/log/faillog, /var/log/kern.log]
@@ -142,6 +145,9 @@ run
 
   >>> print run('uname -r').stdout
   3.7.0-7-generic
+
+  >>> run('uname -a').status
+  0
 
   >>> print run('rm not_existing_directory').stderr
   rm: cannot remove `not_existing_directory': No such file or directory
@@ -262,3 +268,4 @@ contributors
 ------------
 
 * Jakub (kuba.janoszek@gmail.com)
+* Angel Ezquerra
