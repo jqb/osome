@@ -1,0 +1,18 @@
+body {
+    overflow-y: scroll;
+    font-family: 'Merriweather', serif;
+    font-size: 1em;
+    color: #444;
+    text-align:justify;
+}
+
+.property, .descclassname, .descname, .method em{
+    font-family: 'Ubuntu Mono', sans-serif;
+    font-style: normal;
+    font-size: 1.2em;
+}
+
+.class dt {
+    margin-bottom: 15px;
+}
+
