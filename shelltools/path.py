@@ -36,6 +36,20 @@ class pathmeta(type):
 
 class path(pathmeta('base_path', (base_string_class, ), {})):
     """
+
+    .. code-block:: bash
+
+       $ ls -la /var/log
+       total 20
+       drwxrwxr-x 3 root root  4096 Dec 20 22:37 .
+       drwxrwxr-x 5 root root  4096 Dec 20 22:38 ..
+       drwxrwxr-x 2 root root  4096 Dec 20 22:37 gdm
+       -rw-rw-r-- 1 root root 11561 Dec 20 22:37 boot.log
+       -rw-rw-r-- 1 root root 11562 Dec 20 22:37 dmesg
+       -rw-rw-r-- 1 root root 11563 Dec 20 22:37 faillog
+       -rw-rw-r-- 1 root root 11564 Dec 20 22:37 kern.log
+
+
     .. code-block:: python
 
         >>> from shelltools import path
