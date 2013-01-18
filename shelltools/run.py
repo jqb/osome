@@ -24,7 +24,6 @@ class runmeta(type):
 
 class run(runmeta('base_run', (std_output, ), {})):
     """
-    .. code-block:: python
 
       >>> from shelltools import run
 
@@ -33,6 +32,9 @@ class run(runmeta('base_run', (std_output, ), {})):
 
       >>> print run('uname -r').stdout
       3.7.0-7-generic
+
+      >>> run('uname -a').status
+      0
 
       >>> print run('rm not_existing_directory').stderr
       rm: cannot remove `not_existing_directory': No such file or directory
@@ -52,6 +54,18 @@ class run(runmeta('base_run', (std_output, ), {})):
        'drwxrwxr-x 5 user user 4096 Dec 20 22:57 ..',
        'drwxrwxr-x 2 user user 4096 Dec 20 22:37 dir',
        '-rw-rw-r-- 1 user user    0 Dec 20 22:52 file']
+
+
+    To use pipe from the shell.
+
+    .. code-block:: python
+
+      from shelltools import run
+      run('grep something', data=run.stdin)
+
+    .. code-block:: bash
+
+      $ ps aux | python script.py
 
     """
 
