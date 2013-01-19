@@ -41,19 +41,19 @@ def text_list(words, last_word='and'):
 
     .. code-block:: python
 
-        >>> get_text_list(['a', 'b', 'c', 'd'])
+        >>> text_list(['a', 'b', 'c', 'd'])
         'a, b, c and d'
 
-        >>> get_text_list(['a', 'b', 'c'], 'or')
+        >>> text_list(['a', 'b', 'c'], 'or')
         'a, b or c'
 
-        >>> get_text_list(['a', 'b'], 'or')
+        >>> text_list(['a', 'b'], 'or')
         'a or b'
 
-        >>> get_text_list(['a'])
+        >>> text_list(['a'])
         'a'
 
-        >>> get_text_list([])
+        >>> text_list([])
         ''
 
     """

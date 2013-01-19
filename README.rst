@@ -217,6 +217,7 @@ text
    >>> print text_list(["black", "red", "blue", "green"], "and")
    black, red, blue and green
 
+
 .. code-block:: python
 
    from shelltools.text import progress
@@ -224,20 +225,31 @@ text
    for i in progress(range(100)):
        sleep( 0.2)
 
+   [                                ] 0/5 - 00:00:00
+   [######                          ] 1/5 - 00:00:00
+   [############                    ] 2/5 - 00:00:00
+   [###################             ] 3/5 - 00:00:00
+   [#########################       ] 4/5 - 00:00:00
+   [################################] 5/5 - 00:00:00
+    
    for i in progress.dots(range(100)):
        sleep(0.2)
+   .
+   ..
+   ...
+   ....
+   .....
 
    for i in progress.mill(range(100)):
        sleep(0.2)
+       
+   | 0/5
+   / 1/5
+   - 2/5
+   \ 3/5
+   | 4/5
+   / 5/5
 
-
-.. code-block:: bash
-
-   [#####                           ] 9/100 - 00:00:08
-
-   ...................
-
-   - 51/100
 
 tests
 -----
