@@ -1,4 +1,5 @@
 import os
+import pwd
 import shutil
 import fnmatch
 
@@ -101,6 +102,31 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         if len(args) > 1:
             return super(path, cls).__new__(path, cls.join(*args))
         return super(path, cls).__new__(path, *args)
+
+    @property
+    def user(self):
+        """
+        Path attribute, returns name of the user owner of the path.
+
+        >>> path('/home/user').user
+        user
+
+        """
+
+        return pwd.getpwuid(os.stat(self).st_uid).pw_name
+
+    @property
+    def group(self):
+        """
+        Path attribute, returns name of the group owner of the path.
+
+        >>> path('/etc/').group
+        root
+        """
+
+        return pwd.getpwuid(os.stat(self).st_gid).pw_name
+
+
 
     def absolute(self):
         """

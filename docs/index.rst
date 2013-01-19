@@ -97,6 +97,8 @@ _______________
 -------------------------------------------
 .. module:: shelltools.path
 
+.. autoattribute:: shelltools.path.user
+.. autoattribute:: shelltools.path.group
 .. automethod:: shelltools.path.absolute
 .. automethod:: shelltools.path.basename
 .. automethod:: shelltools.path.dir
