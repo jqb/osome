@@ -104,59 +104,133 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
     def absolute(self):
         """
+        Returns a normalized absolutized version of the pathname path.
+
+        .. code-block:: python
+
+           >>> path('.').absolute()
+           /home/user/Projects/shelltools
+        :rtype: path
         """
         return path(os.path.abspath(self))
 
     def basename(self):
         """
+        Returns the base name of pathname path.
+
+        .. code-block:: python
+
+           >>> shelltools.path('/home/user/Projects/shelltools').basename()
+           python-shelltools
+
+        :rtype: path
         """
         return path(os.path.basename(self))
 
     def dir(self):
         """
-        >>> path('/var/log/syslog').dir()
-        /var/log
+        Returns the directory name of pathname path.
+
+        .. code-block:: python
+
+           >>> path('/var/log/syslog').dir()
+           /var/log
+        :rtype: path
         """
         return path(os.path.dirname(self))
 
     def a_time(self):
         """
+        Return the time of last access of path.
+        The return value is a number giving the number
+        of seconds since the epoch.
+
+        .. code-block:: python
+
+           >>> path('/var/log/syslog').a_time()
+           1358549788.7512302
+
+        :rtype: float
         """
         return os.path.getatime(self)
 
     def m_time(self):
         """
+        Return the time of last modification of path.
+        The return value is a number giving the number
+        of seconds since the epoch.
+
+        .. code-block:: python
+
+           >>> path('/var/log/syslog').m_time()
+           1358549788.7512302
+
+        :rtype: float
+
         """
         return os.path.getmtime(self)
 
     def size(self):
         """
+        Return the size, in bytes
+
+        .. code-block:: python
+
+           >>>shelltools.path('.').size()
+           4096
+
+        :rtype: int
         """
-        return os.path.size(self)
+        return os.path.getsize(self)
 
     def exists(self):
         """
-        >>> path('/var/log').exists()
-        True
+        Returns True if path refers to an existing path.
+        Returns False for broken symbolic links.
+
+        .. code-block:: python
+
+           >>> path('/var/log').exists()
+           True
+
+        :rtype: bool
         """
         return os.path.exists(self)
 
     def is_dir(self):
         """
-        >>> path('/var/log').is_dir()
-        True
+        Return True if path is an existing directory.
+        This follows symbolic links, so both is_link() and
+        is_dir() can be true for the same path.
+
+        .. code-block:: python
+
+           >>> path('/var/log').is_dir()
+           True
+
+        :rtype: bool
         """
         return os.path.isdir(self)
 
     def is_file(self):
         """
-        >>> path('/var/log/syslog').is_file()
-        False
+        Return True if path is an existing regular file.
+        This follows symbolic links, so both is_link() and
+        is_file() can be true for the same path.
+
+        .. code-block:: python
+
+           >>> path('/var/log/syslog').is_file()
+           True
+
+        :rtype: bool
         """
         return os.path.isfile(self)
 
     def is_link(self):
         """
+
+        :rtype: path
         """
         return os.path.islink(self)
 
@@ -164,6 +238,8 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         """
         >>> path('dir').mkdir().exists()
         True
+
+        :rtype: path
         """
         if p:
             os.makedirs(self)
@@ -175,6 +251,8 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         """
         >>> path('file').rm().exists()
         False
+
+        :rtype: path
         """
         if os.path.isfile(self):
             os.remove(self)
@@ -195,6 +273,8 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
         >>> path('file1').cp('file_copy').exists()
         True
+
+        :rtype: path
         """
         if self.is_dir():
             shutil.copytree(self, target)
@@ -204,6 +284,7 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
     def ln(self, target, s=True):
         """
+        :rtype: path
         """
         if s:
             os.symlink(os.path.realpath(self), target)
@@ -213,6 +294,7 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
     def unlink(self):
         """
+        :rtype: path
         """
         os.unlink(self)
         return self
@@ -221,6 +303,8 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         """
         >>> path('file').touch().exists()
         True
+
+        :rtype: path
         """
         open(self, "a")
         return self
@@ -232,6 +316,8 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
         >>> path('/var/log/').ls('*log')
         [/var/log/boot.log, /var/log/faillog, /var/log/kern.log]
+
+        :rtype: list
         """
         sort = sort or (lambda e: (not e.is_dir(), e))
         content = [
@@ -243,6 +329,8 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         """
         >>> path('.').ls_files()
         [/var/log/boot.log, /var/log/dmesg, /var/log/faillog, /var/log/kern.log]
+
+        :rtype: list
         """
         return [e for e in self.ls(patern, sort) if (self / e).is_file()]
 
@@ -250,13 +338,27 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         """
         >>> path('.').ls_dirs()
         [/var/log/gdm]]
+
+        :rtype: list
         """
         return [e for e in self.ls(patern, sort) if (self / e).is_dir()]
 
     def walk(self, pattern="*", r=False, sort=None):
         """
-        >>> path('.').walk()
-        <generator object walk at 0x7f7ff6f3c960>
+
+        Location walk generator
+
+        .. code-block:: python
+
+            >>> for element in path('.').walk():
+                    print element
+            /var/log/boot.log
+            /var/log/dmesg
+            /var/log/faillog
+            /var/log/kern.log
+            /var/log/gdm
+
+        :rtype: generator
         """
         sort = sort or (lambda e: (e.is_dir(), e))
         content = self.ls(pattern=pattern, sort=sort)
@@ -273,10 +375,17 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         """
         return self
 
-    def open(self, *args, **kwargs):
+    def open(self, mode=None, buffering=None):
         """
+        Open a file, returning an object of the File Objects.
+
+        .. code-block:: python
+
+            >>> path('/var/log','syslog').open('r')
+            <open file '/var/log/syslog', mode 'r' at 0x294c5d0>
+
         """
-        return open(self, *args, **kwargs)
+        return open(self, mode, buffering)
 
     def __iter__(self):
         """

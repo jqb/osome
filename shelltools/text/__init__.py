@@ -6,7 +6,13 @@ def wrap(text, width):
     A word-wrap function that preserves existing line breaks and most spaces in
     the text. Expects that existing line breaks are posix newlines.
 
-    https://github.com/django/django/blob/master/django/utils/text.py
+    .. code-block:: python
+
+        >>> print wrap("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin ", 30)
+        Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit.
+        Duis sollicitudin
+
     """
     def _generator():
         it = iter(text.split(' '))
@@ -30,26 +36,32 @@ def wrap(text, width):
     return ''.join(_generator())
 
 
-def text_list(list_, last_word='or'):
+def text_list(words, last_word='and'):
     """
-    >>> get_text_list(['a', 'b', 'c', 'd'])
-    'a, b, c or d'
-    >>> get_text_list(['a', 'b', 'c'], 'and')
-    'a, b and c'
-    >>> get_text_list(['a', 'b'], 'and')
-    'a and b'
-    >>> get_text_list(['a'])
-    'a'
-    >>> get_text_list([])
-    ''
 
-    https://github.com/django/django/blob/master/django/utils/text.py
+    .. code-block:: python
+
+        >>> get_text_list(['a', 'b', 'c', 'd'])
+        'a, b, c and d'
+
+        >>> get_text_list(['a', 'b', 'c'], 'or')
+        'a, b or c'
+
+        >>> get_text_list(['a', 'b'], 'or')
+        'a or b'
+
+        >>> get_text_list(['a'])
+        'a'
+
+        >>> get_text_list([])
+        ''
+
     """
-    if len(list_) == 0: return ''
-    if len(list_) == 1: return list_[0]
+    if len(words) == 0: return ''
+    if len(words) == 1: return words[0]
     return '%s %s %s' % (
-        ', '.join([i for i in list_][:-1]),
-        last_word, list_[-1])
+        ', '.join([i for i in words][:-1]),
+        last_word, words[-1])
 
 
 
