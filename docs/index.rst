@@ -75,7 +75,10 @@ This lib is in development, nothing interesting here yet.
     'drwxrwxr-x 2 user user 4096 Dec 20 22:37 dir',
     '-rw-rw-r-- 1 user user    0 Dec 20 22:52 file']
 
-To use pipe from the shell.
+
+to pipe in data
+_______________
+
 
 .. code-block:: python
 
@@ -111,6 +114,7 @@ To use pipe from the shell.
 .. automethod:: shelltools.path.touch
 .. automethod:: shelltools.path.ls
 .. automethod:: shelltools.path.ls_files
+.. automethod:: shelltools.path.ls_dirs
 .. automethod:: shelltools.path.walk
 .. automethod:: shelltools.path.chmod
 .. automethod:: shelltools.path.open

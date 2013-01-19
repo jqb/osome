@@ -229,17 +229,22 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
     def is_link(self):
         """
-
-        :rtype: path
+        :rtype: bool
         """
         return os.path.islink(self)
 
     def mkdir(self, p=False):
         """
+        :param p: if changed will behave like mkdir -p, creating all directories recursively.
+
         >>> path('dir').mkdir().exists()
         True
 
+        >>> path('/home/user/another/dir',p=True).mkdir().exists()
+        True
+
         :rtype: path
+
         """
         if p:
             os.makedirs(self)
@@ -247,17 +252,25 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
             os.mkdir(self)
         return self
 
-    def rm(self, p=False):
+    def rm(self, r=False):
         """
-        >>> path('file').rm().exists()
-        False
+        Removing file or directory, **r** parameter needs to be
+        applied to remove directory recursively.
+
+
+        >>> path('file').rm()
+        file
+
+        >>> path('/tmp').rm(r=True)
+        /tmp
 
         :rtype: path
+
         """
         if os.path.isfile(self):
             os.remove(self)
         else:
-            if p:
+            if r:
                 shutil.rmtree(self)
             else:
                 os.rmdir(self)
@@ -265,6 +278,11 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
     def cp(self, target, r=False):
         """
+
+        Copy the file or the contents the directory to **target** destination,
+        **r** parameter needs to be applied to perform
+        this action recursively inside directory.
+
         >>> path('dir').cp('dir_copy')
         dir_copy
 
@@ -284,6 +302,13 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
     def ln(self, target, s=True):
         """
+        Create a link pointing to source named link_name,
+        default call will create symbolic link, change **s=False**
+        to create hard link.
+
+        >>> path('/tmp/').ln('/home/user/tmp')
+        '/home/user/tmp'
+
         :rtype: path
         """
         if s:
@@ -294,6 +319,13 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
     def unlink(self):
         """
+        Unlink path from the poiting location.
+
+        >>> path('/home/user/tmp').is_link()
+        True
+        >>> path('/home/user/tmp').unlink()
+        '/home/user/tmp'
+
         :rtype: path
         """
         os.unlink(self)
@@ -301,8 +333,10 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
     def touch(self):
         """
-        >>> path('file').touch().exists()
-        True
+        Imitates call of Unix's **touch**.
+
+        >>> path('file').touch()
+        file
 
         :rtype: path
         """
@@ -311,11 +345,18 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
     def ls(self, pattern="*", sort=None):
         """
+
+        Display content of the directory, use **pattern** as filtering parameter,
+        change order by defining **sort** function.
+
         >>> path('/var/log').ls()
         [/var/log/boot.log, /var/log/dmesg, /var/log/faillog, /var/log/kern.log, /var/log/gdm]
 
         >>> path('/var/log/').ls('*log')
         [/var/log/boot.log, /var/log/faillog, /var/log/kern.log]
+
+        path('.').ls(sort=lambda x: not x.startswith('_'))
+        [_themes, _build, _static, _templates, Makefile, conf.py, index.rst]
 
         :rtype: list
         """
@@ -327,6 +368,8 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
     def ls_files(self, patern="*", sort=None):
         """
+        Returns files inside given path.
+
         >>> path('.').ls_files()
         [/var/log/boot.log, /var/log/dmesg, /var/log/faillog, /var/log/kern.log]
 
@@ -336,6 +379,8 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
     def ls_dirs(self, patern="*", sort=None):
         """
+        Returns directories inside given path.
+
         >>> path('.').ls_dirs()
         [/var/log/gdm]]
 
