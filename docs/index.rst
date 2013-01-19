@@ -97,6 +97,45 @@ _______________
 -------------------------------------------
 .. module:: shelltools.path
 
+.. code-block:: python
+
+    >>> from shelltools import path
+
+    >>> path('/var/log')
+    /var/log
+
+    >>> path('/var', 'log')
+    /var/log
+
+    >>> path('/var', 'log', 'syslog')
+    /var/log/syslog
+
+    >>> [(element.user, element.group, element.permissions) for element in path('.')]
+    [('user', 'user', '0664'),
+     ('user', 'user', '0664'),
+     ('user', 'user', '0664'),
+     ('user', 'user', '0664'),
+     ('user', 'user', '0664'),
+     ('user', 'user', '0664'),
+     ('user', 'user', '0664'),
+     ('user', 'user', '0775'),
+     ('user', 'user', '0664')]
+
+Path is also a instance of basestring so all methods implemented for `string/unicode
+<http://docs.python.org/2/library/stdtypes.html#string-methods>`_ should work as well.
+
+.. code-block:: python
+
+   >>> path('.').absolute().split('/')
+   ['', 'home', 'user', 'Projects', 'python-shelltools']
+
+   >>> path('/home/user/test_tmp_directory').replace('_', '-')
+   '/home/user/test-tmp-directory'
+
+   >>> location = path('/home/user/test_tmp_directory')
+   >>> location.mv(location.replace('_', '-'))
+
+
 .. autoattribute:: shelltools.path.user
 .. autoattribute:: shelltools.path.group
 .. autoattribute:: shelltools.path.permissions
@@ -130,5 +169,5 @@ _______________
 --------------------------------------
 .. module:: shelltools.text
 
-.. automethod:: shelltools.text.wrap
 .. automethod:: shelltools.text.text_list
+.. automethod:: shelltools.text.wrap
