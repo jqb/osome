@@ -99,6 +99,7 @@ _______________
 
 .. autoattribute:: shelltools.path.user
 .. autoattribute:: shelltools.path.group
+.. autoattribute:: shelltools.path.permissions
 .. automethod:: shelltools.path.absolute
 .. automethod:: shelltools.path.basename
 .. automethod:: shelltools.path.dir

@@ -1,5 +1,6 @@
 import os
 import pwd
+import stat
 import shutil
 import fnmatch
 
@@ -64,6 +65,16 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         >>> path('/var', 'log', 'syslog')
         /var/log/syslog
 
+        >>> [(element.user, element.group, element.permissions) for element in path('.')]
+        [('user', 'user', '0664'),
+         ('user', 'user', '0664'),
+         ('user', 'user', '0664'),
+         ('user', 'user', '0664'),
+         ('user', 'user', '0664'),
+         ('user', 'user', '0664'),
+         ('user', 'user', '0664'),
+         ('user', 'user', '0775'),
+         ('user', 'user', '0664')]
 
     Path is also a instance of basestring so all methods implemented for `string/unicode
     <http://docs.python.org/2/library/stdtypes.html#string-methods>`_ should work as well.
@@ -126,7 +137,14 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
         return pwd.getpwuid(os.stat(self).st_gid).pw_name
 
+    @property
+    def permissions(self):
+        """
+        >>> path('.').permissions
+        '0775'
+        """
 
+        return oct(stat.S_IMODE(os.stat(self).st_mode))
 
     def absolute(self):
         """
