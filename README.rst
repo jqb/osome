@@ -58,6 +58,9 @@ path
    >>> path('/var', 'log')
    /var/log
 
+   >>> path('/var/log').user
+   root
+
    >>> path('/var/log').exists()
    True
 
