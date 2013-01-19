@@ -126,7 +126,7 @@ def test_rm():
         path(dir_2_path).rm()
     assert os.path.exists(dir_2_path)
 
-    path(dir_2_path).rm(p=True)
+    path(dir_2_path).rm(r=True)
     assert not os.path.exists(dir_2_path)
 
 
