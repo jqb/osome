@@ -172,6 +172,8 @@ Path is also a instance of basestring so all methods implemented for `string/uni
 .. automethod:: shelltools.text.text_list
 .. automethod:: shelltools.text.wrap
 
+.. automethod:: shelltools.text.progress
+
 .. code-block:: python
 
    from shelltools.text import progress
@@ -179,23 +181,39 @@ Path is also a instance of basestring so all methods implemented for `string/uni
    for i in progress(range(10)):
        sleep(0.2)
 
+
+.. code-block:: python
+
    [                                ] 0/5 - 00:00:00
    [######                          ] 1/5 - 00:00:00
    [############                    ] 2/5 - 00:00:00
    [###################             ] 3/5 - 00:00:00
    [#########################       ] 4/5 - 00:00:00
    [################################] 5/5 - 00:00:00
-    
+
+.. automethod:: shelltools.text.progress.dots
+
+.. code-block:: python
+
    for i in progress.dots(range(10)):
        sleep(0.2)
+
+.. code-block:: python
+
    .
    ..
    ...
    ....
    .....
 
+.. automethod:: shelltools.text.progress.mill
+
+.. code-block:: python
+
    for i in progress.mill(range(10)):
        sleep(0.2)
+
+.. code-block:: python
        
    | 0/5
    / 1/5
