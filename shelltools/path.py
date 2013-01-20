@@ -81,7 +81,7 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
     .. code-block:: python
 
-       >>> path('.').absolute().split('/')
+       >>> path('.').absolute.split('/')
        ['', 'home', 'user', 'Projects', 'python-shelltools']
 
        >>> path('/home/user/test_tmp_directory').replace('_', '-')
@@ -157,6 +157,7 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
            >>> path('.').absolute
            /home/user/Projects/shelltools
+
         :rtype: path
         """
         return path(os.path.abspath(self))
@@ -169,7 +170,7 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         .. code-block:: python
 
            >>> shelltools.path('/home/user/Projects/shelltools').basename
-           python-shelltools
+           shelltools
 
         :rtype: path
         """
@@ -235,7 +236,7 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         :rtype: int
         """
         return os.path.getsize(self)
-    
+
     @property
     def exists(self):
         """
