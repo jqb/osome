@@ -140,49 +140,56 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
     @property
     def mod(self):
         """
+        To get Unix path permissions.
+
         >>> path('.').mod
         '0775'
         """
 
         return oct(stat.S_IMODE(os.stat(self).st_mode))
 
+    @property
     def absolute(self):
         """
-        Returns a normalized absolutized version of the pathname path.
+        Returns a normalised absolutized version of the pathname path.
 
         .. code-block:: python
 
-           >>> path('.').absolute()
+           >>> path('.').absolute
            /home/user/Projects/shelltools
         :rtype: path
         """
         return path(os.path.abspath(self))
 
+    @property
     def basename(self):
         """
-        Returns the base name of pathname path.
+        Returns the path basename.
 
         .. code-block:: python
 
-           >>> shelltools.path('/home/user/Projects/shelltools').basename()
+           >>> shelltools.path('/home/user/Projects/shelltools').basename
            python-shelltools
 
         :rtype: path
         """
         return path(os.path.basename(self))
 
+    @property
     def dir(self):
         """
-        Returns the directory name of pathname path.
+        Returns the directory path of pathname path.
 
         .. code-block:: python
 
-           >>> path('/var/log/syslog').dir()
+           >>> path('/var/log/syslog').dir
            /var/log
+
         :rtype: path
         """
         return path(os.path.dirname(self))
 
+    @property
     def a_time(self):
         """
         Return the time of last access of path.
@@ -191,13 +198,14 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
         .. code-block:: python
 
-           >>> path('/var/log/syslog').a_time()
+           >>> path('/var/log/syslog').a_time
            1358549788.7512302
 
         :rtype: float
         """
         return os.path.getatime(self)
 
+    @property
     def m_time(self):
         """
         Return the time of last modification of path.
@@ -206,7 +214,7 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
         .. code-block:: python
 
-           >>> path('/var/log/syslog').m_time()
+           >>> path('/var/log/syslog').m_time
            1358549788.7512302
 
         :rtype: float
@@ -214,19 +222,21 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         """
         return os.path.getmtime(self)
 
+    @property
     def size(self):
         """
-        Return the size, in bytes
+        Return the size of path in bytes
 
         .. code-block:: python
 
-           >>>shelltools.path('.').size()
+           >>>shelltools.path('.').size
            4096
 
         :rtype: int
         """
         return os.path.getsize(self)
-
+    
+    @property
     def exists(self):
         """
         Returns True if path refers to an existing path.

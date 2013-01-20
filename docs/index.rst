@@ -182,13 +182,14 @@ Path is also a instance of basestring so all methods implemented for `string/uni
 .. autoattribute:: shelltools.path.user
 .. autoattribute:: shelltools.path.group
 .. autoattribute:: shelltools.path.mod
-.. automethod:: shelltools.path.absolute
-.. automethod:: shelltools.path.basename
-.. automethod:: shelltools.path.dir
-.. automethod:: shelltools.path.a_time
-.. automethod:: shelltools.path.m_time
-.. automethod:: shelltools.path.size
-.. automethod:: shelltools.path.exists
+.. autoattribute:: shelltools.path.absolute
+.. autoattribute:: shelltools.path.basename
+.. autoattribute:: shelltools.path.dir
+.. autoattribute:: shelltools.path.a_time
+.. autoattribute:: shelltools.path.m_time
+.. autoattribute:: shelltools.path.size
+.. autoattribute:: shelltools.path.exists
+
 .. automethod:: shelltools.path.is_dir
 .. automethod:: shelltools.path.is_file
 .. automethod:: shelltools.path.mkdir

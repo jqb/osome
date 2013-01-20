@@ -40,17 +40,17 @@ def teardown_function(function):
 
 
 def test_path():
-    assert path(root, file_1).exists()
-    assert not path(root, file_1, 'xxxss').exists()
+    assert path(root, file_1).exists
+    assert not path(root, file_1, 'xxxss').exists
 
 
 def test_exists():
-    assert path(dir_1_path).exists()
-    assert path(file_1_path).exists()
+    assert path(dir_1_path).exists
+    assert path(file_1_path).exists
 
 
 def test_absolute():
-    assert os.path.abspath(file_1_path) == path(file_1_path).absolute()
+    assert os.path.abspath(file_1_path) == path(file_1_path).absolute
 
 
 def test_is_dir():
@@ -72,14 +72,14 @@ def test_is_file():
 def test_ln_s():
     symlink = path(file_1_path).ln(os.path.join('xxx', 'symlink'))
 
-    assert symlink.exists()
+    assert symlink.exists
     assert symlink.is_link()
 
 
 def test_ln_hard():
     symlink = path(file_1_path).ln(os.path.join('xxx', 'symlink'), s=False)
 
-    assert symlink.exists()
+    assert symlink.exists
     assert not symlink.is_link()
 
 
@@ -91,9 +91,9 @@ def test_unlink():
         target
     )
 
-    assert path(target).exists()
+    assert path(target).exists
     path(target).unlink()
-    assert not path(target).exists()
+    assert not path(target).exists
 
 
 def test_mkdir():
@@ -182,21 +182,21 @@ def test_iter():
 
 def test__div__():
     joined_path = path(root) / path(file_1)
-    assert joined_path.exists()
+    assert joined_path.exists
 
     joined_path = path(root) / file_1
-    assert joined_path.exists()
+    assert joined_path.exists
 
     joined_path = path(root) / path(file_1) / path("xxx")
-    assert not joined_path.exists()
+    assert not joined_path.exists
 
     joined_path = path(root) / path(file_1) / "xxx"
-    assert not joined_path.exists()
+    assert not joined_path.exists
 
 
 def test_join():
-    assert path.join(root, file_1).exists()
-    assert not path.join(root, file_1, 'xxx').exists()
+    assert path.join(root, file_1).exists
+    assert not path.join(root, file_1, 'xxx').exists
 
 
 def test_base_methods():
