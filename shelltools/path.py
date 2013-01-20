@@ -65,7 +65,7 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         >>> path('/var', 'log', 'syslog')
         /var/log/syslog
 
-        >>> [(element.user, element.group, element.permissions) for element in path('.')]
+        >>> [(element.user, element.group, element.mod) for element in path('.')]
         [('user', 'user', '0664'),
          ('user', 'user', '0664'),
          ('user', 'user', '0664'),
@@ -138,9 +138,9 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         return pwd.getpwuid(os.stat(self).st_gid).pw_name
 
     @property
-    def permissions(self):
+    def mod(self):
         """
-        >>> path('.').permissions
+        >>> path('.').mod
         '0775'
         """
 

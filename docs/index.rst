@@ -138,7 +138,7 @@ Path is also a instance of basestring so all methods implemented for `string/uni
 
 .. autoattribute:: shelltools.path.user
 .. autoattribute:: shelltools.path.group
-.. autoattribute:: shelltools.path.permissions
+.. autoattribute:: shelltools.path.mod
 .. automethod:: shelltools.path.absolute
 .. automethod:: shelltools.path.basename
 .. automethod:: shelltools.path.dir
