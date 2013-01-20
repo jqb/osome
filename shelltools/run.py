@@ -1,5 +1,5 @@
-"""
 
+"""
   >>> from shelltools import run
 
   >>> print run('uname -r')
@@ -137,6 +137,8 @@ class run(runmeta('base_run', (std_output, ), {})):
         cwd = kwargs.get('cwd')
         data = kwargs.get('data')
 
+        chain = []
+
         for command in args:
             process = cls.create_process(command, cwd, env)
 
@@ -147,16 +149,23 @@ class run(runmeta('base_run', (std_output, ), {})):
 
             out = stdout if stdout else stderr
 
-            obj = std_output.__new__(run, out)
+            obj = super(run, cls).__new__(run, out)
 
             obj.stdout = std_output(stdout)
             obj.stderr = std_output(stderr)
             obj.status = process.returncode
             obj.command = command
 
+            chain.append(obj)
+
+            obj.chain = chain[:]
+
             data = obj.stdout
 
         return obj
+
+    def __repr__(self):
+        return " | ".join([e.command for e in self.chain])
 
 
 if __name__ == "__main__":

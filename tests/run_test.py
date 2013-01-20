@@ -48,3 +48,13 @@ def test_status():
 
 def test_pipe():
     assert run(_commands.ls, _commands.more).status == 0
+
+
+def test_chain():
+    assert run('ps aux', 'wc -l', 'wc -c').status == 0
+    assert len(run('ps aux', 'wc -l', 'wc -c').chain) == 3
+    assert [0, 0, 0] == [e.status for e in run('ps aux', 'wc -l', 'wc -c').chain]
+
+    assert [1, 0] == [e.status for e in run('ps aux fail', 'wc -l').chain]
+
+

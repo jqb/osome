@@ -47,42 +47,85 @@ The bucket of python shell helpers, no dependencies, simple API.
 
    >>> from shelltools import run
 
-   >>> print run('uname -r')
+   >>> run('uname -r').stdout
    3.7.0-7-generic
 
-   >>> print run('uname -r').stdout
-   3.7.0-7-generic
+   >>> run('uname -r', 'wc -c')
+   uname -r | wc -c
 
-   >>> run('uname -a').status
-   0
-
-   >>> print run('rm not_existing_directory').stderr
-   rm: cannot remove `not_existing_directory': No such file or directory
-
-   >>> print run('ls -la', 'wc -l')
-   14
-
-   >>> print run('ls -la', 'wc -l', 'wc -c')
-   3
-
-   >>> run('ls -la', 'wc -l', 'wc -c')
-   ls -la | wc -l | wc -c
-
-   >>> print run('ls -la').stdout.lines
-   ['total 20',
-    'drwxrwxr-x 3 user user 4096 Dec 20 22:55 .',
-    'drwxrwxr-x 5 user user 4096 Dec 20 22:57 ..',
-    'drwxrwxr-x 2 user user 4096 Dec 20 22:37 dir',
-    '-rw-rw-r-- 1 user user    0 Dec 20 22:52 file']
+   >>> run('uname -r', 'wc -c').stdout
+   16
 
 
-to pipe in data
-_______________
+.. py:attribute:: run.stdout
 
+   Standard output from executed command
+
+   .. code-block:: python
+
+      >>> run('uname -r').stdout
+      3.7.0-7-generic
+
+      >>> run('ls -la').stdout.lines
+      ['total 20',
+       'drwxrwxr-x 3 user user 4096 Dec 20 22:55 .',
+       'drwxrwxr-x 5 user user 4096 Dec 20 22:57 ..',
+       'drwxrwxr-x 2 user user 4096 Dec 20 22:37 dir',
+       '-rw-rw-r-- 1 user user    0 Dec 20 22:52 file']
+
+      >>> run('ls -la').stdout.qlines
+      [['total 20'],
+       ['drwxrwxr-x, 3, user, user, 4096, Dec, 20, 22:55, .'],
+       ['drwxrwxr-x, 5, user, user, 4096, Dec, 20, 22:57, ..'],
+       ['drwxrwxr-x, 2, user, user, 4096, Dec, 20, 22:37, dir'],
+       ['-rw-rw-r--, 1, user, user,    0, Dec, 20, 22:52, file']]
+
+
+.. py:attribute:: run.stderr
+
+   Standard error from executed command
+
+   .. code-block:: python
+
+      >>> run('rm not_existing_directory').stderr
+      rm: cannot remove `not_existing_directory': No such file or directory
+
+
+.. py:attribute:: run.status
+
+   Status code of executed command
+
+   .. code-block:: python
+
+      >>> run('uname -r').status
+      0
+
+      >>> run('rm not_existing_directory').status
+      1
+
+.. py:attribute:: run.chain
+
+   The full chain of command executed 
+
+   .. code-block:: python
+
+      >>> run('uname -r', 'wc -c').chain
+      [uname -r, uname -r | wc -c]
+
+   To get statuses from all component commands
+
+      >>> [e.status for e in run('uname -r', 'wc -c').chain]
+      [0, 0]
+
+
+.. py:attribute:: run.pipe
+
+To pipe data in
 
 .. code-block:: python
 
     from shelltools import run
+
     run('grep something', data=run.stdin)
 
 .. code-block:: bash
