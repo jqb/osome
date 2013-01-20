@@ -243,9 +243,9 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         Returns True if path refers to an existing path.
         Returns False for broken symbolic links.
 
-        .. code-block:: python
+        .. code-block:: pythonc
 
-           >>> path('/var/log').exists()
+           >>> path('/var/log').exists
            True
 
         :rtype: bool
@@ -292,10 +292,10 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         """
         :param p: if changed will behave like mkdir -p, creating all directories recursively.
 
-        >>> path('dir').mkdir().exists()
+        >>> path('dir').mkdir().exists
         True
 
-        >>> path('/home/user/another/dir',p=True).mkdir().exists()
+        >>> path('/home/user/another/dir',p=True).mkdir().exists
         True
 
         :rtype: path
@@ -343,8 +343,7 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
         >>> path('file1').cp('file_copy')
         file_copy
-
-        >>> path('file1').cp('file_copy').exists()
+        >>> path('file1').cp('file_copy').exists
         True
 
         :rtype: path
@@ -505,7 +504,7 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         /var/log/syslog
         >>> path('/var/log') / 'syslog'
         /var/log/syslog
-        >>> (path('/var/log') / 'syslog').exists()
+        >>> (path('/var/log') / 'syslog').exists
         """
 
         return path(os.path.join(self, other))

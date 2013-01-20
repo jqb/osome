@@ -61,7 +61,7 @@ path
    >>> path('/var/log').user
    root
 
-   >>> path('/var/log').exists()
+   >>> path('/var/log').exists
    True
 
    >>> path('/var/log').is_dir()
@@ -98,21 +98,21 @@ path
    >>> path('/var/log') / 'syslog'
    /var/log/syslog
 
-   >>> (path('/var/log') / 'syslog').exists()
+   >>> (path('/var/log') / 'syslog').exists
 
    >>> path('/var/log','syslog').open('r')
    <open file '/var/log/syslog', mode 'r' at 0x294c5d0>
 
-   >>> path('file').touch().exists()
+   >>> path('file').touch().exists
    True
 
-   >>> path('dir').mkdir().exists()
+   >>> path('dir').mkdir().exists
    True
 
-   >>> path('file').rm().exists()
+   >>> path('file').rm().exists
    False
 
-   >>> path('dir').rm().exists()
+   >>> path('dir').rm().exists
    False
 
    >>> path('dir').cp('dir_copy')
@@ -121,7 +121,7 @@ path
    >>> path('file1').cp('file_copy')
    'file_copy'
 
-   >>> path('file1').cp('file_copy').exists()
+   >>> path('file1').cp('file_copy').exists
    True
 
 Path is also a instance of basestring so all methods implemented for `string/unicode
@@ -129,7 +129,7 @@ Path is also a instance of basestring so all methods implemented for `string/uni
 
 .. code-block:: python
 
-   >>> path('.').absolute().split('/')
+   >>> path('.').absolute.split('/')
    ['', 'home', 'user', 'Projects', 'python-shelltools']
 
    >>> path('/home/user/test_tmp_directory').replace('_', '-')
