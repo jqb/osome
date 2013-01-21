@@ -9,37 +9,27 @@ The bucket of python shell helpers, no dependencies, simple API.
 * Python3.3
 * PyPy1.9
 
+- shelltools: (shell)
+
+  - path - path wraper around all methods related to path manipulation
+  - run - subprocess wrapper
+  - text: - strings helper functions
+  - ui: - halper to create better text shell, let's steal from clint for now, **missing**
+  - args: - helper to handle shell arguments, **missing**
+
 
 Documentation
 -------------
-https://shelltools.readthedocs.org/en/latest/
+https://shelltools.readthedocs.org/
+
 
 Code
 ----
 https://github.com/xando/python-shelltools
 
 
-- shelltools: (shell)
-
-  - path - path wraper around all methods related to path manipulation
-  - run - subprocess wrapper
-  - text: - strings helper functions
-
-    - text_list
-    - wrap
-    - progress
-
-  - ui: - halper to create better text shell, let's steal from clint for now
-
-    - progress
-    - color
-    - indent
-
-  - args: - helper to handle shell arguments (missing)
-
-
-path
-----
+shelltools.path
+---------------
 
 .. code-block:: python
 
@@ -85,8 +75,10 @@ path
    >>> location = path('/home/user/test_tmp_directory')
    >>> location.mv( location.replace('_', '-') )
 
-run
----
+
+shelltools.run
+--------------
+
 
 .. code-block:: python
 
@@ -123,23 +115,9 @@ run
   $ ps aux | python script.py
 
 
-context
--------
+shelltools.text
+---------------
 
-.. code-block:: python
-
-  with path('/tmp') as p:
-      print p.run('ls -la')
-
-      p('new_directory1').mkdir()
-
-      (p / 'new_directory2').mkdir()
-
-      (p / 'empty_file').touch()
-
-
-text
-----
 
 .. code-block:: python
 
