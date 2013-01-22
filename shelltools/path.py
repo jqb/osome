@@ -487,7 +487,7 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
             os.chmod(self, mode)
         return self
 
-    def open(self, mode=None, buffering=None):
+    def open(self, mode=None, *args, **kwargs):
         """
         Open a file, returning an object of the File Objects.
 
@@ -497,7 +497,7 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
             <open file '/var/log/syslog', mode 'r' at 0x294c5d0>
 
         """
-        return open(self, mode, buffering)
+        return open(self, mode, *args, **kwargs)
 
     def __iter__(self):
         """
