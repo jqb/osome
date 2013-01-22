@@ -469,9 +469,22 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
                 for item in element.walk(pattern="*", sort=sort):
                     yield item
 
-    def chmod(self, mod):
+    def chmod(self, mode):
         """
+        To change path access permissions
+
+        >>> path('test').chmod('0775')
+        >>> path('test').mod
+        '0775'
         """
+        # ToDo: this is probably not the 'best' implementation
+
+        if isinstance(mode, basestring):
+            mode = sum([(8**i * int(e)) for i,e in \
+                        enumerate(reversed(mode.lstrip("0")))])
+            os.chmod(self, mode)
+        else:
+            os.chmod(self, mode)
         return self
 
     def open(self, mode=None, buffering=None):
@@ -517,4 +530,10 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
 
 if __name__ == "__main__":
-    pass
+    print path('test').mod
+    path('test').chmod("0757")
+    print path('test').mod
+    path('test').chmod(0775)
+    print path('test').mod
+    # pass
+    # [(i, int(e)) for i,e in enumerate(reversed("0777".lstrip("0")))]
