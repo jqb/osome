@@ -143,7 +143,7 @@ To pipe data in
     >>> path('/var', 'log', 'syslog')
     /var/log/syslog
 
-    >>> [(element.user, element.group, element.permissions) for element in path('.')]
+    >>> [(element.user, element.group, element.mod) for element in path('.')]
     [('user', 'user', '0664'),
      ('user', 'user', '0664'),
      ('user', 'user', '0664'),
