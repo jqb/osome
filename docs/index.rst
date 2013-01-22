@@ -3,35 +3,35 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+=================
 python-shelltools
 =================
 
 The bucket of python shell helpers, no dependencies, simple API.
 
 
+* :mod:`shelltools.run` subprocess wrapper
+* :mod:`shelltools.path` wraper around methods related to path manipulation
+* :mod:`shelltools.text` string helper functions
+
+**Supported platforms**
+
+* Python2.6
 * Python2.7
 * Python3.3
 * PyPy1.9
 
-- shelltools: (shell)
-
-  - path - path wraper around all methods related to path manipulation
-  - run - subprocess wrapper
-  - text: - strings helper functions
-
-    - text_list
-    - wrap
-    - progress
+**Source Code**
 
 https://github.com/xando/python-shelltools
+
 
 -----
 
 
 :mod:`shelltools.run` -- subprocess wrapper
 -------------------------------------------
-.. module:: shelltools.run
-
+.. py:module:: shelltools.run
 
 .. code-block:: python
 
