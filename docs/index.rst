@@ -6,11 +6,9 @@
 python-shelltools
 =================
 
-https://github.com/xando/python-shelltools
-
 The bucket of python shell helpers, no dependencies, simple API.
 
-* Python2.6
+
 * Python2.7
 * Python3.3
 * PyPy1.9
@@ -25,6 +23,7 @@ The bucket of python shell helpers, no dependencies, simple API.
     - wrap
     - progress
 
+https://github.com/xando/python-shelltools
 
 -----
 
