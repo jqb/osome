@@ -169,7 +169,7 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
         .. code-block:: python
 
-           >>> shelltools.path('/home/user/Projects/shelltools').basename
+           >>> path('/home/user/Projects/shelltools').basename
            shelltools
 
         :rtype: path
@@ -230,7 +230,7 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
         .. code-block:: python
 
-           >>>shelltools.path('.').size
+           >>> path('.').size
            4096
 
         :rtype: int
