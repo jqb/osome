@@ -9,7 +9,6 @@ python-shelltools
 https://github.com/xando/python-shelltools
 
 The bucket of python shell helpers, no dependencies, simple API.
-**This lib is in development**, nothing interesting here yet.
 
 * Python2.6
 * Python2.7
@@ -25,14 +24,6 @@ The bucket of python shell helpers, no dependencies, simple API.
     - text_list
     - wrap
     - progress
-
-  - ui: - halper to create better text shell, let's steal from clint for now
-
-    - progress
-    - color
-    - indent
-
-  - args: - helper to handle shell arguments (missing)
 
 
 -----
