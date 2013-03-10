@@ -4,7 +4,7 @@ import stat
 import shutil
 import fnmatch
 
-from shelltools import run, base_string_class
+from osome import run, base_string_class
 
 
 class pathmeta(type):
@@ -54,7 +54,7 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
     .. code-block:: python
 
-        >>> from shelltools import path
+        >>> from osome import path
 
         >>> path('/var/log')
         /var/log
@@ -82,7 +82,7 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
     .. code-block:: python
 
        >>> path('.').absolute.split('/')
-       ['', 'home', 'user', 'Projects', 'python-shelltools']
+       ['', 'home', 'user', 'Projects', 'osome']
 
        >>> path('/home/user/test_tmp_directory').replace('_', '-')
        '/home/user/test-tmp-directory'
@@ -156,7 +156,7 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
         .. code-block:: python
 
            >>> path('.').absolute
-           /home/user/Projects/shelltools
+           /home/user/Projects/osome
 
         :rtype: path
         """
@@ -169,8 +169,8 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
         .. code-block:: python
 
-           >>> path('/home/user/Projects/shelltools').basename
-           shelltools
+           >>> path('/home/user/Projects/osome').basename
+           osome
 
         :rtype: path
         """
@@ -530,10 +530,4 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
 
 
 if __name__ == "__main__":
-    print path('test').mod
-    path('test').chmod("0757")
-    print path('test').mod
-    path('test').chmod(0775)
-    print path('test').mod
-    # pass
-    # [(i, int(e)) for i,e in enumerate(reversed("0777".lstrip("0")))]
+    pass

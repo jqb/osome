@@ -1,5 +1,6 @@
 import sys
-from shelltools import run, base_string_class
+
+from osome import run, base_string_class
 
 
 # dafault _commands
@@ -56,5 +57,4 @@ def test_chain():
     assert [0, 0, 0] == [e.status for e in run('ps aux', 'wc -l', 'wc -c').chain]
 
     assert [1, 0] == [e.status for e in run('ps aux fail', 'wc -l').chain]
-
 

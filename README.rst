@@ -1,36 +1,35 @@
-python-shelltools (in development)
-==================================
+osome (in development)
+======================
 
-The bucket of python shell helpers, no dependencies, simple API.
+The bucket of python shell wrappers around os library, no dependencies, simple API.
 
 * Python2.6
 * Python2.7
 * Python3.3
 * PyPy1.9
 
-- shelltools: (shell)
+- osome: (python os module wrappers)
 
   - path - path wraper around all methods related to path manipulation
   - run - subprocess wrapper
-  - text: - strings helper functions
 
 
 Documentation
 -------------
-https://shelltools.readthedocs.org/
+https://osome.readthedocs.org/
 
 
 Code
 ----
-https://github.com/xando/python-shelltools
+https://github.com/xando/osome
 
 
-shelltools.path
+osome.path
 ---------------
 
 .. code-block:: python
 
-   >>> from shelltools import path
+   >>> from osome import path
 
    >>> path('/var/log')
    /var/log
@@ -73,13 +72,13 @@ shelltools.path
    >>> location.mv( location.replace('_', '-') )
 
 
-shelltools.run
+osome.run
 --------------
 
 
 .. code-block:: python
 
-  >>> from shelltools import run
+  >>> from osome import run
 
   >>> print run('uname -r').stdout
   3.7.0-7-generic
@@ -103,7 +102,7 @@ shelltools.run
 
 .. code-block:: python
 
-  from shelltools import run
+  from osome import run
 
   run('grep something', data=run.stdin)
 
@@ -112,46 +111,12 @@ shelltools.run
   $ ps aux | python script.py
 
 
-shelltools.text
----------------
-
-
-.. code-block:: python
-
-   >>> print wrap("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin ", 30)
-   Lorem ipsum dolor sit amet,
-   consectetur adipiscing elit.
-   Duis sollicitudin
-
-   >>> print text_list(["black", "red", "blue", "green"])
-   black, red, blue or green
-
-   >>> print text_list(["black", "red", "blue", "green"], "and")
-   black, red, blue and green
-
-
-.. code-block:: python
-
-   from shelltools.text import progress
-
-   for i in progress(range(100)):
-       sleep( 0.2)
-
-.. code-block:: none
-
-   [                                ] 0/5 - 00:00:00
-   [######                          ] 1/5 - 00:00:00
-   [############                    ] 2/5 - 00:00:00
-   [###################             ] 3/5 - 00:00:00
-   [#########################       ] 4/5 - 00:00:00
-   [################################] 5/5 - 00:00:00
-
 tests
 -----
 
-.. image:: https://api.travis-ci.org/xando/python-shelltools.png?branch=master
+.. image:: https://api.travis-ci.org/xando/osome.png?branch=master
 
-Travis CI, https://travis-ci.org/xando/python-shelltools
+Travis CI, https://travis-ci.org/xando/osome
 
 
 Tests are implemented with `py.tests

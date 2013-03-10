@@ -1,6 +1,6 @@
 
 """
-  >>> from shelltools import run
+  >>> from osome import run
 
   >>> print run('uname -r')
   3.7.0-7-generic
@@ -35,7 +35,7 @@ To use pipe from the shell.
 
 .. code-block:: python
 
-  from shelltools import run
+  from osome import run
   run('grep something', data=run.stdin)
 
 .. code-block:: bash
@@ -49,7 +49,7 @@ import sys
 import shlex
 import subprocess
 
-from shelltools import base_string_class
+from osome import base_string_class
 
 
 class std_output(base_string_class):
@@ -71,7 +71,7 @@ class runmeta(type):
 class run(runmeta('base_run', (std_output, ), {})):
     """
 
-      >>> from shelltools import run
+      >>> from osome import run
 
       >>> print run('uname -r')
       3.7.0-7-generic
@@ -106,7 +106,7 @@ class run(runmeta('base_run', (std_output, ), {})):
 
     .. code-block:: python
 
-      from shelltools import run
+      from osome import run
       run('grep something', data=run.stdin)
 
     .. code-block:: bash

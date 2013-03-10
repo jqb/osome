@@ -3,7 +3,7 @@ import shutil
 
 import pytest
 
-from shelltools import path
+from osome import path
 
 root = 'xxx'
 

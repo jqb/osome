@@ -1,18 +1,16 @@
-.. shelltools documentation master file, created by
+.. osome documentation master file, created by
    sphinx-quickstart on Mon Jan 14 21:49:10 2013.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-=================
-python-shelltools
-=================
+=====
+osome
+=====
 
-The bucket of python shell helpers, no dependencies, simple API.
+The bucket of python shell wrappers around os library, no dependencies, simple API.
 
-
-* :mod:`shelltools.run` subprocess wrapper
-* :mod:`shelltools.path` wraper around methods related to path manipulation
-* :mod:`shelltools.text` string helper functions
+* :mod:`osome.run` subprocess wrapper
+* :mod:`osome.path` wraper around methods related to path manipulation
 
 **Supported platforms**
 
@@ -23,19 +21,19 @@ The bucket of python shell helpers, no dependencies, simple API.
 
 **Source Code**
 
-https://github.com/xando/python-shelltools
+https://github.com/xando/osome
 
 
 -----
 
 
-:mod:`shelltools.run` -- subprocess wrapper
+:mod:`osome.run` -- subprocess wrapper
 -------------------------------------------
-.. py:module:: shelltools.run
+.. py:module:: osome.run
 
 .. code-block:: python
 
-   >>> from shelltools import run
+   >>> from osome import run
 
    >>> run('uname -r').stdout
    3.7.0-7-generic
@@ -100,7 +98,7 @@ https://github.com/xando/python-shelltools
    .. code-block:: python
 
       >>> run('uname -r', 'wc -c').chain
-      [uname -r, uname -r | wc -c]
+      [uname -r | wc -c]
 
    To get statuses from all component commands
 
@@ -114,7 +112,7 @@ To pipe data in
 
 .. code-block:: python
 
-    from shelltools import run
+    from osome import run
 
     run('grep something', data=run.stdin)
 
@@ -126,13 +124,13 @@ To pipe data in
 -----
 
 
-:mod:`shelltools.path` -- path manipulation
+:mod:`osome.path` -- path manipulation
 -------------------------------------------
-.. module:: shelltools.path
+.. module:: osome.path
 
 .. code-block:: python
 
-    >>> from shelltools import path
+    >>> from osome import path
 
     >>> path('/var/log')
     /var/log
@@ -160,7 +158,7 @@ Path is also a instance of basestring so all methods implemented for `string/uni
 .. code-block:: python
 
    >>> path('.').absolute().split('/')
-   ['', 'home', 'user', 'Projects', 'python-shelltools']
+   ['', 'home', 'user', 'Projects', 'osome']
 
    >>> path('/home/user/test_tmp_directory').replace('_', '-')
    '/home/user/test-tmp-directory'
@@ -169,90 +167,31 @@ Path is also a instance of basestring so all methods implemented for `string/uni
    >>> location.mv(location.replace('_', '-'))
 
 
-.. autoattribute:: shelltools.path.user
-.. autoattribute:: shelltools.path.group
-.. autoattribute:: shelltools.path.mod
-.. autoattribute:: shelltools.path.absolute
-.. autoattribute:: shelltools.path.basename
-.. autoattribute:: shelltools.path.dir
-.. autoattribute:: shelltools.path.a_time
-.. autoattribute:: shelltools.path.m_time
-.. autoattribute:: shelltools.path.size
-.. autoattribute:: shelltools.path.exists
+.. autoattribute:: osome.path.user
+.. autoattribute:: osome.path.group
+.. autoattribute:: osome.path.mod
+.. autoattribute:: osome.path.absolute
+.. autoattribute:: osome.path.basename
+.. autoattribute:: osome.path.dir
+.. autoattribute:: osome.path.a_time
+.. autoattribute:: osome.path.m_time
+.. autoattribute:: osome.path.size
+.. autoattribute:: osome.path.exists
 
-.. automethod:: shelltools.path.is_dir
-.. automethod:: shelltools.path.is_file
-.. automethod:: shelltools.path.mkdir
-.. automethod:: shelltools.path.rm
-.. automethod:: shelltools.path.cp
-.. automethod:: shelltools.path.ln
-.. automethod:: shelltools.path.unlink
-.. automethod:: shelltools.path.touch
-.. automethod:: shelltools.path.ls
-.. automethod:: shelltools.path.ls_files
-.. automethod:: shelltools.path.ls_dirs
-.. automethod:: shelltools.path.walk
-.. automethod:: shelltools.path.chmod
-.. automethod:: shelltools.path.open
+.. automethod:: osome.path.is_dir
+.. automethod:: osome.path.is_file
+.. automethod:: osome.path.mkdir
+.. automethod:: osome.path.rm
+.. automethod:: osome.path.cp
+.. automethod:: osome.path.ln
+.. automethod:: osome.path.unlink
+.. automethod:: osome.path.touch
+.. automethod:: osome.path.ls
+.. automethod:: osome.path.ls_files
+.. automethod:: osome.path.ls_dirs
+.. automethod:: osome.path.walk
+.. automethod:: osome.path.chmod
+.. automethod:: osome.path.open
 
 
 -----
-
-
-:mod:`shelltools.text` -- text helpers
---------------------------------------
-.. module:: shelltools.text
-
-.. automethod:: shelltools.text.text_list
-.. automethod:: shelltools.text.wrap
-
-.. automethod:: shelltools.text.progress
-
-.. code-block:: python
-
-   from shelltools.text import progress
-
-   for i in progress(range(10)):
-       sleep(0.2)
-
-
-.. code-block:: python
-
-   [                                ] 0/5 - 00:00:00
-   [######                          ] 1/5 - 00:00:00
-   [############                    ] 2/5 - 00:00:00
-   [###################             ] 3/5 - 00:00:00
-   [#########################       ] 4/5 - 00:00:00
-   [################################] 5/5 - 00:00:00
-
-.. automethod:: shelltools.text.progress.dots
-
-.. code-block:: python
-
-   for i in progress.dots(range(10)):
-       sleep(0.2)
-
-.. code-block:: python
-
-   .
-   ..
-   ...
-   ....
-   .....
-
-.. automethod:: shelltools.text.progress.mill
-
-.. code-block:: python
-
-   for i in progress.mill(range(10)):
-       sleep(0.2)
-
-.. code-block:: python
-       
-   | 0/5
-   / 1/5
-   - 2/5
-   \ 3/5
-   | 4/5
-   / 5/5
-

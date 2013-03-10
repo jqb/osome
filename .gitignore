@@ -1,5 +1,6 @@
 .virtualenv
 docs/_build
+.site-packages
 
 # https://raw.github.com/github/gitignore/master/Python.gitignore
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# shelltools documentation build configuration file, created by
+# osome documentation build configuration file, created by
 # sphinx-quickstart on Mon Jan 14 21:49:10 2013.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -44,7 +44,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'shelltools'
+project = u'osome'
 copyright = u'2013, Sebastian Pawluś'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -168,7 +168,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'shelltoolsdoc'
+htmlhelp_basename = 'osomedoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -187,7 +187,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'shelltools.tex', u'shelltools Documentation',
+  ('index', 'osome.tex', u'osome Documentation',
    u'Sebastian Pawluś', 'manual'),
 ]
 
@@ -217,7 +217,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'shelltools', u'shelltools Documentation',
+    ('index', 'osome', u'osome Documentation',
      [u'Sebastian Pawluś'], 1)
 ]
 
@@ -231,8 +231,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'shelltools', u'shelltools Documentation',
-   u'Sebastian Pawluś', 'shelltools', 'One line description of project.',
+  ('index', 'osome', u'osome documentation',
+   u'Sebastian Pawluś', 'osome', 'One line description of project.',
    'Miscellaneous'),
 ]
 

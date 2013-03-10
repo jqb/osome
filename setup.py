@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
-from shelltools import path
+from osome import path
 
 description = "The bucket of python shell helpers, no dependencies, simple API."
 
@@ -11,12 +11,12 @@ version = (project / 'VERSION').open("r").read()
 license = (project / 'LICENSE').open("r").read()
 
 
-setup(name='shelltools',
+setup(name='osome',
       version=version,
       packages=find_packages(),
       author='Sebastian Pawluś',
       author_email='sebastian.pawlus@gmail.com',
-      url='https://github.com/xando/python-shelltools',
+      url='https://github.com/xando/osome',
       description=description,
       keywords="shell tools shell path ",
       license=license,
