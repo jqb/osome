@@ -1,5 +1,5 @@
-osome (in development)
-======================
+osome
+=====
 
 The bucket of python shell wrappers around os library, no dependencies, simple API.
 
@@ -22,6 +22,14 @@ https://osome.readthedocs.org/
 Code
 ----
 https://github.com/xando/osome
+
+
+Install
+-------
+
+.. code-block:: bash
+   pip install osome
+
 
 
 osome.path
@@ -61,7 +69,7 @@ osome.path
 
    >>> path('/var/log','syslog').open('r')
    <open file '/var/log/syslog', mode 'r' at 0x294c5d0>
-   
+
    >>> path('/var/log').cp('copy', r=True)
    copy
 
