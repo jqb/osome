@@ -94,7 +94,9 @@ class path(pathmeta('base_path', (base_string_class, ), {})):
     """
 
     def __call__(self, *args):
-        return self / path(*args)
+        if args:
+            return self / path(*args)
+        return self
 
     def __enter__(self):
         return self
